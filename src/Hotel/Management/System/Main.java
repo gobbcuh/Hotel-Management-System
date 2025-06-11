@@ -6,7 +6,7 @@ import javax.swing.JLabel;
 
 public class Main extends JFrame {
     Main() {
-        ImageIcon imageIcon = new ImageIcon(ClassLoader.getSystemResource("icon/main.gif"));
+        ImageIcon imageIcon = new ImageIcon(ClassLoader.getSystemResource("icon/main.gif")); // upload gif from canva
         JLabel label = new JLabel(imageIcon);
         label.setBounds(0, 0, 858, 680);
         add(label);
@@ -15,6 +15,13 @@ public class Main extends JFrame {
         setLocation(200, 10);
         setSize(858, 680);
         setVisible(true);
+
+        try {
+            Thread.sleep(5000);
+            setVisible(false);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 
