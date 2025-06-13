@@ -52,6 +52,24 @@ public class Room extends JFrame {
         availability.setFont(new Font("Tahoma", Font.BOLD, 14));
         panel.add(availability);
 
+        JLabel Clean = new JLabel("Clean Status");
+        Clean.setBounds(216, 15, 150, 19);
+        Clean.setForeground(Color.WHITE);
+        Clean.setFont(new Font("Tahoma", Font.BOLD, 14));
+        panel.add(Clean);
+
+        JLabel Price = new JLabel("Price");
+        Price.setBounds(330, 15, 80, 19);
+        Price.setForeground(Color.WHITE);
+        Price.setFont(new Font("Tahoma", Font.BOLD, 14));
+        panel.add(Price);
+
+        JLabel Bed = new JLabel("Bed Type");
+        Bed.setBounds(417, 15, 80, 19);
+        Bed.setForeground(Color.WHITE);
+        Bed.setFont(new Font("Tahoma", Font.BOLD, 14));
+        panel.add(Bed);
+
 
         setLayout(null);
         setLocation(500, 100);
