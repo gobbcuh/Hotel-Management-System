@@ -17,7 +17,8 @@ public class Main extends JFrame {
         setVisible(true);
 
         try {
-            Thread.sleep(10000);
+            Thread.sleep(5000);
+            new Login();
             setVisible(false);
         } catch (Exception e) {
             e.printStackTrace();
