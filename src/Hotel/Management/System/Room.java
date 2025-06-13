@@ -46,6 +46,12 @@ public class Room extends JFrame {
         back.setBounds(200, 500, 120, 30);
         panel.add(back);
 
+        JLabel availability = new JLabel("Availability");
+        availability.setBounds(119, 15, 80, 19);
+        availability.setForeground(Color.WHITE);
+        availability.setFont(new Font("Tahoma", Font.BOLD, 14));
+        panel.add(availability);
+
 
         setLayout(null);
         setLocation(500, 100);
