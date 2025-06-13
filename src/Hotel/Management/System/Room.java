@@ -11,6 +11,13 @@ public class Room extends JFrame {
         panel.setLayout(null);
         add(panel);
 
+        ImageIcon imageIcon = new ImageIcon(ClassLoader.getSystemResource("icon/logo.png")); // to be uploaded
+        Image image = imageIcon.getImage().getScaledInstance(200, 200, Image.SCALE_DEFAULT);
+        ImageIcon imageIcon1 = new ImageIcon(image);
+        JLabel label = new JLabel(imageIcon1);
+        label.setBounds(600, 200, 200, 200);
+        panel.add(label);
+
         setLayout(null);
         setLocation(500, 100);
         setSize(900, 600);
