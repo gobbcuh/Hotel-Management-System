@@ -45,11 +45,18 @@ public class Department extends JFrame {
         });
 
         JLabel label1 = new JLabel("Department");
-        label1.setBounds(145, 11, 105, 14);
+        label1.setBounds(145, 11, 105, 20);
         label1.setForeground(Color.WHITE);
         label1.setFont(new Font("Tahoma", Font.BOLD, 14));
         panel.add(label1);
 
+        JLabel label2 = new JLabel("Budget");
+        label2.setBounds(431, 11, 105, 20);
+        label2.setForeground(Color.WHITE);
+        label2.setFont(new Font("Tahoma", Font.BOLD, 14));
+        panel.add(label2);
+
+        setUndecorated(true);
         setLayout(null);
         setLocation(550, 150);
         setSize(700, 500);
