@@ -92,6 +92,7 @@ public class Employee extends JFrame {
         natID.setFont(new Font("Tahoma", Font.BOLD, 14));
         panel.add(natID);
 
+        setUndecorated(true);
         setLayout(null);
         setLocation(430, 100);
         setSize(1000, 600);
