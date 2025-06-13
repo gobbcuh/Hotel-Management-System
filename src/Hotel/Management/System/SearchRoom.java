@@ -4,9 +4,11 @@ import net.proteanit.sql.DbUtils;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 
-public class SearchRoom extends JFrame {
+public class SearchRoom extends JFrame implements ActionListener {
     JCheckBox checkBox;
     Choice choice;
     JTable table;
@@ -94,20 +96,44 @@ public class SearchRoom extends JFrame {
         add.setBounds(200, 400, 120, 30);
         add.setBackground(Color.BLACK);
         add.setForeground(Color.WHITE);
+        add.addActionListener(this);
         panel.add(add);
 
         back = new JButton("Back");
         back.setBounds(380, 400, 120, 30);
         back.setBackground(Color.BLACK);
         back.setForeground(Color.WHITE);
+        back.addActionListener(this);
         panel.add(back);
 
-
-
+        setUndecorated(true);
         setLayout(null);
         setLocation(500, 200);
         setSize(700, 500);
         setVisible(true);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == add) {
+            String Q = "select * from room where bed_type = '"+choice.getSelectedItem()+"'";
+            String Q1 = "select * from room where availability = 'available' And bed_type = '"+choice.getSelectedItem()+"'";
+            try {
+                con c = new con();
+                ResultSet resultSet = c.statement.executeQuery(Q);
+                table.setModel(DbUtils.resultSetToTableModel(resultSet));
+
+                if (checkBox.isSelected()) {
+                    ResultSet resultSet1 = c.statement.executeQuery(Q1);
+                    table.setModel(DbUtils.resultSetToTableModel(resultSet1));
+                }
+
+            } catch (Exception E) {
+                E.printStackTrace();
+            }
+        } else {
+            setVisible(false);
+        }
     }
 
     public static void main(String[] args) {
