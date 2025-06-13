@@ -90,7 +90,7 @@ public class Reception extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-
+                    new Employee();
                 } catch (Exception E) {
                     E.printStackTrace();
                 }
@@ -122,7 +122,7 @@ public class Reception extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-
+                    new ManagerInfo();
                 } catch (Exception E) {
                     E.printStackTrace();
                 }
