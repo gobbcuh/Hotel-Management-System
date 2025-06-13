@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 
 public class Room extends JFrame {
     JTable table;
+    JButton back;
 
     Room() {
         JPanel panel = new JPanel();
@@ -38,6 +39,13 @@ public class Room extends JFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        back = new JButton("Back");
+        back.setBackground(Color.BLACK);
+        back.setForeground(Color.WHITE);
+        back.setBounds(200, 500, 120, 30);
+        panel.add(back);
+
 
         setLayout(null);
         setLocation(500, 100);
