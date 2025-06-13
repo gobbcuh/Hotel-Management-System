@@ -2,10 +2,12 @@ package Hotel.Management.System;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.util.Date;
 
-public class NewCustomer extends JFrame {
+public class NewCustomer extends JFrame implements ActionListener {
     JComboBox comboBox;
     JTextField textFieldNumber, TextName, TextCountry, TextDeposit;
     JRadioButton r1, r2;
@@ -144,12 +146,14 @@ public class NewCustomer extends JFrame {
         add.setBounds(100, 430, 120, 30);
         add.setForeground(Color.WHITE);
         add.setBackground(Color.BLACK);
+        add.addActionListener(this);
         panel.add(add);
 
         back = new JButton("Back");
         back.setBounds(260, 430, 120, 30);
         back.setForeground(Color.WHITE);
         back.setBackground(Color.BLACK);
+        back.addActionListener(this);
         panel.add(back);
 
 
@@ -157,6 +161,42 @@ public class NewCustomer extends JFrame {
         setLocation(500, 150);
         setSize(850, 550);
         setVisible(true);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == add) {
+            con c = new con();
+            String radioBTN = null;
+            if (r1.isSelected()) {
+                radioBTN = "Male";
+            } else if (r2.isSelected()) {
+                radioBTN = "Female";
+            }
+
+            String s1 = (String) comboBox.getSelectedItem();
+            String s2 = textFieldNumber.getText();
+            String s3 = TextName.getText();
+            String s4 = radioBTN;
+            String s5 = TextCountry.getText();
+            String s6 = c1.getSelectedItem();
+            String s7 = date.getText();
+            String s8 = TextDeposit.getText();
+
+            try {
+                String q = "insert into customer values('"+s1+"', '"+s2+"', '"+s3+"', '"+s4+"', '"+s5+"', '"+s6+"', '"+s7+"', '"+s8+"')";
+                String q1 = "update room set availability = 'Occupied' where room_number = "+s6;
+                c.statement.executeUpdate(q);
+                c.statement.executeUpdate(q1);
+                JOptionPane.showMessageDialog(null, "Added Successfully");
+                setVisible(false);
+
+            } catch (Exception E) {
+                E.printStackTrace();
+            }
+        } else {
+            setVisible(false);
+        }
     }
 
     public static void main(String[] args) {
