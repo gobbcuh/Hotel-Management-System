@@ -2,6 +2,9 @@ package Hotel.Management.System;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.ResultSet;
 import java.util.Date;
 
 public class CheckOut extends JFrame {
@@ -47,7 +50,7 @@ public class CheckOut extends JFrame {
         panel.add(checkinTime);
 
         JLabel labelCheckinTime = new JLabel();
-        labelCheckinTime.setBounds(30, 180, 150, 30);
+        labelCheckinTime.setBounds(200, 180, 250, 30);
         labelCheckinTime.setFont(new Font("Tahoma", Font.BOLD, 14));
         labelCheckinTime.setForeground(Color.WHITE);
         panel.add(labelCheckinTime);
@@ -66,7 +69,69 @@ public class CheckOut extends JFrame {
         LabelCheckoutTime.setForeground(Color.WHITE);
         panel.add(LabelCheckoutTime);
 
+        try {
+            con c = new con();
+            ResultSet resultSet = c.statement.executeQuery("select * from customer");
+            while (resultSet.next()) {
+                Customer.add(resultSet.getString("number"));
+            }
 
+        } catch (Exception E) {
+            E.printStackTrace();
+        }
+
+        JButton checkOut = new JButton("Check Out");
+        checkOut.setBounds(30, 300, 120, 30);
+        checkOut.setForeground(Color.WHITE);
+        checkOut.setBackground(Color.BLACK);
+        panel.add(checkOut);
+        checkOut.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    con cv = new con();
+                    cv.statement.executeUpdate("delete from customer where number = '"+Customer.getSelectedItem()+"'");
+                    cv.statement.executeUpdate("update room set availability = 'available' where room_number = '"+labelRoomNumber.getText()+"'");
+
+                    JOptionPane.showMessageDialog(null, "Done");
+                    setVisible(false);
+
+                } catch (Exception E) {
+                    E.printStackTrace();
+                }
+            }
+        });
+
+        JButton check = new JButton("Check");
+        check.setBounds(300, 300, 120, 30);
+        check.setForeground(Color.WHITE);
+        check.setBackground(Color.BLACK);
+        panel.add(check);
+        check.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                con c = new con();
+                try {
+                    ResultSet resultSet = c.statement.executeQuery("select * from customer where number = '"+Customer.getSelectedItem()+"'");
+                    while(resultSet.next()) {
+                        labelRoomNumber.setText(resultSet.getString("room"));
+                        labelCheckinTime.setText(resultSet.getString("checkintime"));
+
+                    }
+
+                } catch (Exception E) {
+                    E.printStackTrace();
+                }
+            }
+        });
+
+        JButton back = new JButton("Back");
+        back.setBounds(170, 300, 120, 30);
+        back.setForeground(Color.WHITE);
+        back.setBackground(Color.BLACK);
+        panel.add(back);
+
+        setUndecorated(true);
         setLayout(null);
         setSize(800, 400);
         setLocation(500, 210);
