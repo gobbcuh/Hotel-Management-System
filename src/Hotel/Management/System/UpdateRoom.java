@@ -1,4 +1,4 @@
-package Hotel.Management.System;
+package Hotel.Management.System; // updates does not update
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,27 +10,27 @@ public class UpdateRoom extends JFrame {
     UpdateRoom() {
         JPanel panel = new JPanel();
         panel.setBounds(5,5,940,490);
-        panel.setBackground(new Color(3,45,48));
+        panel.setBackground(new Color(250, 213, 213));
         panel.setLayout(null);
         add(panel);
 
-        ImageIcon imageIcon = new ImageIcon(ClassLoader.getSystemResource("icon/logo.png"));
-        Image image = imageIcon.getImage().getScaledInstance(300,300,Image.SCALE_DEFAULT);
+        ImageIcon imageIcon = new ImageIcon(ClassLoader.getSystemResource("icon/covalent.png"));
+        Image image = imageIcon.getImage().getScaledInstance(295, 150, Image.SCALE_DEFAULT);
         ImageIcon imageIcon1 = new ImageIcon(image);
         JLabel label = new JLabel(imageIcon1);
-        label.setBounds(500,60,300,300);
+        label.setBounds(550, 10, 295, 150);
         panel.add(label);
 
         JLabel label1  = new JLabel("Update Room Status");
         label1.setBounds(124,11,222,25);
         label1.setFont(new Font("Tahoma", Font.BOLD, 20));
-        label1.setForeground(Color.WHITE);
+        label1.setForeground(Color.BLACK);
         panel.add(label1);
 
         JLabel label2  = new JLabel("ID :");
         label2.setBounds(25,88,46,14);
-        label2.setFont(new Font("Tahoma", Font.PLAIN, 14));
-        label2.setForeground(Color.WHITE);
+        label2.setFont(new Font("Tahoma", Font.BOLD, 14));
+        label2.setForeground(Color.BLACK);
         panel.add(label2);
 
         Choice c = new Choice();
@@ -48,9 +48,9 @@ public class UpdateRoom extends JFrame {
         }
 
         JLabel label3  = new JLabel("Room Number :");
-        label3.setBounds(25,129,107,14);
-        label3.setFont(new Font("Tahoma", Font.PLAIN, 14));
-        label3.setForeground(Color.WHITE);
+        label3.setBounds(25,129,120,14);
+        label3.setFont(new Font("Tahoma", Font.BOLD, 14));
+        label3.setForeground(Color.BLACK);
         panel.add(label3);
 
         JTextField textField3 = new JTextField();
@@ -59,8 +59,8 @@ public class UpdateRoom extends JFrame {
 
         JLabel label4  = new JLabel("Availability :");
         label4.setBounds(25,174,97,14);
-        label4.setFont(new Font("Tahoma", Font.PLAIN, 14));
-        label4.setForeground(Color.WHITE);
+        label4.setFont(new Font("Tahoma", Font.BOLD, 14));
+        label4.setForeground(Color.BLACK);
         panel.add(label4);
 
         JTextField textField4 = new JTextField();
@@ -69,8 +69,8 @@ public class UpdateRoom extends JFrame {
 
         JLabel label5  = new JLabel("Clean Status :");
         label5.setBounds(25,216,97,14);
-        label5.setFont(new Font("Tahoma", Font.PLAIN, 14));
-        label5.setForeground(Color.WHITE);
+        label5.setFont(new Font("Tahoma", Font.BOLD, 14));
+        label5.setForeground(Color.BLACK);
         panel.add(label5);
 
         JTextField textField5 = new JTextField();
@@ -78,7 +78,7 @@ public class UpdateRoom extends JFrame {
         panel.add(textField5);
 
         JButton update = new JButton("Update");
-        update.setBounds(120,315,89,23);
+        update.setBounds(120,300,89,23);
         update.setBackground(Color.BLACK);
         update.setForeground(Color.WHITE);
         panel.add(update);
@@ -99,10 +99,8 @@ public class UpdateRoom extends JFrame {
             }
         });
 
-
-
         JButton back = new JButton("Back");
-        back.setBounds(180,355,89,23);
+        back.setBounds(180,345,89,23);
         back.setBackground(Color.BLACK);
         back.setForeground(Color.WHITE);
         panel.add(back);
@@ -114,7 +112,7 @@ public class UpdateRoom extends JFrame {
         });
 
         JButton check = new JButton("Check");
-        check.setBounds(60,355,89,23);
+        check.setBounds(60,345,89,23);
         check.setBackground(Color.BLACK);
         check.setForeground(Color.WHITE);
         panel.add(check);
@@ -143,9 +141,10 @@ public class UpdateRoom extends JFrame {
             }
         });
 
+        setUndecorated(true);
         setLayout(null);
         setSize(950,450);
-        setLocation(400,200);
+        setLocation(305,135);
         setVisible(true);
     }
 
