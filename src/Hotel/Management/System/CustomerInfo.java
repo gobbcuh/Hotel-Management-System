@@ -12,14 +12,14 @@ public class CustomerInfo extends JFrame {
     CustomerInfo() {
         JPanel panel = new JPanel();
         panel.setBounds(5, 5, 890, 590);
-        panel.setBackground(new Color(3, 45, 48));
+        panel.setBackground(new Color(250, 213, 213));
         panel.setLayout(null);
         add(panel);
 
         JTable table = new JTable();
         table.setBounds(10, 40, 900, 450);
-        table.setBackground(new Color(3, 45, 48));
-        table.setForeground(Color.WHITE);
+        table.setBackground(new Color(250, 213, 213));
+        table.setForeground(Color.BLACK);
         panel.add(table);
 
         try {
@@ -34,54 +34,54 @@ public class CustomerInfo extends JFrame {
 
         JLabel id = new JLabel("ID");
         id.setBounds(31, 11, 100, 14);
-        id.setForeground(Color.WHITE);
+        id.setForeground(Color.BLACK);
         id.setFont(new Font("Tahoma", Font.BOLD, 14));
         panel.add(id);
 
         JLabel number = new JLabel("Number");
         number.setBounds(150, 11, 100, 14);
-        number.setForeground(Color.WHITE);
+        number.setForeground(Color.BLACK);
         number.setFont(new Font("Tahoma", Font.BOLD, 14));
         panel.add(number);
 
         JLabel name = new JLabel("Name");
         name.setBounds(270, 11, 100, 14);
-        name.setForeground(Color.WHITE);
+        name.setForeground(Color.BLACK);
         name.setFont(new Font("Tahoma", Font.BOLD, 14));
         panel.add(name);
 
         JLabel gender = new JLabel("Sex");
         gender.setBounds(360, 11, 100, 14);
-        gender.setForeground(Color.WHITE);
+        gender.setForeground(Color.BLACK);
         gender.setFont(new Font("Tahoma", Font.BOLD, 14));
         panel.add(gender);
 
         JLabel country = new JLabel("Country");
-        country.setBounds(480, 11, 100, 25);
-        country.setForeground(Color.WHITE);
+        country.setBounds(480, 11, 100, 14);
+        country.setForeground(Color.BLACK);
         country.setFont(new Font("Tahoma", Font.BOLD, 14));
         panel.add(country);
 
         JLabel room = new JLabel("Room");
         room.setBounds(600, 11, 100, 14);
-        room.setForeground(Color.WHITE);
+        room.setForeground(Color.BLACK);
         room.setFont(new Font("Tahoma", Font.BOLD, 14));
         panel.add(room);
 
         JLabel Time = new JLabel("Check-In Time");
         Time.setBounds(680, 11, 110, 14);
-        Time.setForeground(Color.WHITE);
+        Time.setForeground(Color.BLACK);
         Time.setFont(new Font("Tahoma", Font.BOLD, 14));
         panel.add(Time);
 
         JLabel deposit = new JLabel("Deposit");
-        deposit.setBounds(800, 11, 100, 25);
-        deposit.setForeground(Color.WHITE);
+        deposit.setBounds(800, 11, 100, 14);
+        deposit.setForeground(Color.BLACK);
         deposit.setFont(new Font("Tahoma", Font.BOLD, 14));
         panel.add(deposit);
 
         JButton back = new JButton("Back");
-        back.setBounds(450, 510, 120, 30);
+        back.setBounds(370, 510, 120, 30);
         back.setBackground(Color.BLACK);
         back.setForeground(Color.WHITE);
         panel.add(back);
@@ -96,7 +96,7 @@ public class CustomerInfo extends JFrame {
         setUndecorated(true);
         setLayout(null);
         setSize(900, 600);
-        setLocation(500, 100);
+        setLocation(330, 50);
         setVisible(true);
     }
 
