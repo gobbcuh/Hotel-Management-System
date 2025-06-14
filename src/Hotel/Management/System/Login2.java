@@ -13,52 +13,57 @@ public class Login2 extends JFrame implements ActionListener {
 
     Login2() {
         JLabel label1 = new JLabel("Username");
-        label1.setBounds(40, 20, 100, 30);
-        label1.setFont(new Font("Tahoma", Font.BOLD, 16)); // change font
-        label1.setForeground(Color.WHITE);
+        label1.setBounds(90, 180, 100, 30);
+        label1.setFont(new Font("Tahoma", Font.BOLD, 16));
+        label1.setForeground(Color.BLACK);
         add(label1);
 
         JLabel label2 = new JLabel("Password");
-        label2.setBounds(40, 70, 100, 30);
+        label2.setBounds(90, 230, 100, 30);
         label2.setFont(new Font("Tahoma", Font.BOLD, 16)); // change font
-        label2.setForeground(Color.WHITE);
+        label2.setForeground(Color.BLACK);
         add(label2);
 
         textField1 = new JTextField();
-        textField1.setBounds(150, 20, 150, 30);
-        textField1.setForeground(Color.WHITE);
-        textField1.setBackground(new Color(26, 104, 110)); // change background color
+        textField1.setBounds(200, 180, 150, 30);
+        textField1.setForeground(Color.BLACK);
+        textField1.setBackground(Color.WHITE);
         add(textField1);
 
         passwordField1 = new JPasswordField();
-        passwordField1.setBounds(150, 70, 150, 30);
-        passwordField1.setForeground(Color.WHITE);
-        passwordField1.setBackground(new Color(26, 104, 110)); // change background color
+        passwordField1.setBounds(200, 230, 150, 30);
+        passwordField1.setForeground(Color.BLACK);
+        passwordField1.setBackground(Color.WHITE);
         add(passwordField1);
 
-        ImageIcon imageIcon = new ImageIcon(ClassLoader.getSystemResource("icon/logo.png")); // upload image
+        /* ImageIcon imageIcon = new ImageIcon(ClassLoader.getSystemResource("icon/logo.png")); // upload image
         Image i1 = imageIcon.getImage().getScaledInstance(666, 375, Image.SCALE_DEFAULT); // adjust if needed
         JLabel label = new JLabel(imageIcon);
         label.setBounds(150, 120, 666, 375); // adjust if needed
-        add(label);
+        add(label); */
 
         b1 = new JButton("Login");
-        b1.setBounds(40, 300, 120, 30);
-        b1.setFont(new Font("Serif", Font.BOLD, 15)); // change font
+        b1.setBounds(90, 380, 120, 30);
+        b1.setFont(new Font("Tahoma", Font.BOLD, 15));
         b1.setBackground(Color.BLACK);
         b1.setForeground(Color.WHITE);
         b1.addActionListener(this);
         add(b1);
 
         b2 = new JButton("Cancel");
-        b2.setBounds(180, 300, 120, 30);
-        b2.setFont(new Font("Serif", Font.BOLD, 15)); // change font
+        b2.setBounds(230, 380, 120, 30);
+        b2.setFont(new Font("Tahoma", Font.BOLD, 15));
         b2.setBackground(Color.BLACK);
         b2.setForeground(Color.WHITE);
         b2.addActionListener(this);
         add(b2);
 
-        getContentPane().setBackground(new Color(3, 45, 48)); // change background color
+        ImageIcon imageIcon = new ImageIcon(ClassLoader.getSystemResource("icon/admin-login.png"));
+        JLabel label = new JLabel(imageIcon);
+        label.setBounds(0, 0, 440, 580);
+        add(label);
+
+        getContentPane().setBackground(new Color(3, 45, 48));
         setLayout(null);
         setLocation(400, 40);
         setSize(450, 600);
