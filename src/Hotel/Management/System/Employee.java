@@ -12,14 +12,14 @@ public class Employee extends JFrame {
     Employee() {
         JPanel panel = new JPanel();
         panel.setBounds(5, 5, 990, 590);
-        panel.setBackground(new Color(3, 45, 48));
+        panel.setBackground(new Color(250, 213, 213));
         panel.setLayout(null);
         add(panel);
 
         JTable table = new JTable();
         table.setBounds(10, 34, 980, 450);
-        table.setForeground(Color.WHITE);
-        table.setBackground(new Color(3, 45, 48));
+        table.setForeground(Color.BLACK);
+        table.setBackground(new Color(250, 213, 213));
         panel.add(table);
 
         try {
@@ -46,55 +46,55 @@ public class Employee extends JFrame {
 
         JLabel name = new JLabel("Name");
         name.setBounds(41, 11, 70, 19);
-        name.setForeground(Color.WHITE);
+        name.setForeground(Color.BLACK);
         name.setFont(new Font("Tahoma", Font.BOLD, 14));
         panel.add(name);
 
         JLabel Age = new JLabel("Age");
         Age.setBounds(159, 11, 70, 19);
-        Age.setForeground(Color.WHITE);
+        Age.setForeground(Color.BLACK);
         Age.setFont(new Font("Tahoma", Font.BOLD, 14));
         panel.add(Age);
 
         JLabel gender = new JLabel("Sex");
         gender.setBounds(273, 11, 70, 19);
-        gender.setForeground(Color.WHITE);
+        gender.setForeground(Color.BLACK);
         gender.setFont(new Font("Tahoma", Font.BOLD, 14));
         panel.add(gender);
 
         JLabel job = new JLabel("Job");
         job.setBounds(416, 11, 70, 19);
-        job.setForeground(Color.WHITE);
+        job.setForeground(Color.BLACK);
         job.setFont(new Font("Tahoma", Font.BOLD, 14));
         panel.add(job);
 
         JLabel salary = new JLabel("Salary");
         salary.setBounds(536, 11, 70, 19);
-        salary.setForeground(Color.WHITE);
+        salary.setForeground(Color.BLACK);
         salary.setFont(new Font("Tahoma", Font.BOLD, 14));
         panel.add(salary);
 
         JLabel phone = new JLabel("Phone");
         phone.setBounds(656, 11, 70, 19);
-        phone.setForeground(Color.WHITE);
+        phone.setForeground(Color.BLACK);
         phone.setFont(new Font("Tahoma", Font.BOLD, 14));
         panel.add(phone);
 
         JLabel email = new JLabel("Email");
         email.setBounds(786, 11, 70, 19);
-        email.setForeground(Color.WHITE);
+        email.setForeground(Color.BLACK);
         email.setFont(new Font("Tahoma", Font.BOLD, 14));
         panel.add(email);
 
         JLabel natID = new JLabel("PhilSys No.");
-        natID.setBounds(896, 11, 70, 19);
-        natID.setForeground(Color.WHITE);
+        natID.setBounds(896, 11, 100, 19);
+        natID.setForeground(Color.BLACK);
         natID.setFont(new Font("Tahoma", Font.BOLD, 14));
         panel.add(natID);
 
         setUndecorated(true);
         setLayout(null);
-        setLocation(430, 100);
+        setLocation(279, 55);
         setSize(1000, 600);
         setVisible(true);
     }
