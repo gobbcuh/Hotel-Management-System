@@ -30,6 +30,12 @@ public class CustomerInfo extends JFrame {
             e.printStackTrace();
         }
 
+        JLabel id = new JLabel("ID");
+        id.setBounds(31, 11, 46, 14);
+        id.setForeground(Color.WHITE);
+        id.setFont(new Font("Tahoma", Font.BOLD, 14));
+        panel.add(id);
+
 
         setLayout(null);
         setSize(900, 600);
