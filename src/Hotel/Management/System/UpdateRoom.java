@@ -6,8 +6,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 
-public class UpdateCheck extends JFrame {
-    UpdateCheck(){
+public class UpdateRoom extends JFrame {
+    UpdateRoom() {
         JPanel panel = new JPanel();
         panel.setBounds(5,5,940,490);
         panel.setBackground(new Color(3,45,48));
@@ -21,7 +21,7 @@ public class UpdateCheck extends JFrame {
         label.setBounds(500,60,300,300);
         panel.add(label);
 
-        JLabel label1  = new JLabel("Check-In Details");
+        JLabel label1  = new JLabel("Update Room Status");
         label1.setBounds(124,11,222,25);
         label1.setFont(new Font("Tahoma", Font.BOLD, 20));
         label1.setForeground(Color.WHITE);
@@ -57,7 +57,7 @@ public class UpdateCheck extends JFrame {
         textField3.setBounds(248,129,140,20);
         panel.add(textField3);
 
-        JLabel label4  = new JLabel("Name :");
+        JLabel label4  = new JLabel("Availability :");
         label4.setBounds(25,174,97,14);
         label4.setFont(new Font("Tahoma", Font.PLAIN, 14));
         label4.setForeground(Color.WHITE);
@@ -67,7 +67,7 @@ public class UpdateCheck extends JFrame {
         textField4.setBounds(248,174,140,20);
         panel.add(textField4);
 
-        JLabel label5  = new JLabel("Checked-in :");
+        JLabel label5  = new JLabel("Clean Status :");
         label5.setBounds(25,216,97,14);
         label5.setFont(new Font("Tahoma", Font.PLAIN, 14));
         label5.setForeground(Color.WHITE);
@@ -77,29 +77,8 @@ public class UpdateCheck extends JFrame {
         textField5.setBounds(248,216,140,20);
         panel.add(textField5);
 
-        JLabel label6  = new JLabel("Amount Paid :");
-        label6.setBounds(25,261,150,14);
-        label6.setFont(new Font("Tahoma", Font.PLAIN, 14));
-        label6.setForeground(Color.WHITE);
-        panel.add(label6);
-
-        JTextField textField6 = new JTextField();
-        textField6.setBounds(248,261,140,20);
-        panel.add(textField6);
-
-        JLabel label7  = new JLabel("Pending Amount :");
-        label7.setBounds(25,302,150,14);
-        label7.setFont(new Font("Tahoma", Font.PLAIN, 14));
-        label7.setForeground(Color.WHITE);
-        panel.add(label7);
-
-        JTextField textField7 = new JTextField();
-        textField7.setBounds(248,302,140,20);
-        panel.add(textField7);
-
-
         JButton update = new JButton("Update");
-        update.setBounds(56,378,89,23);
+        update.setBounds(120,315,89,23);
         update.setBackground(Color.BLACK);
         update.setForeground(Color.WHITE);
         panel.add(update);
@@ -107,13 +86,10 @@ public class UpdateCheck extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    con C  = new con();
-                    String q = c.getSelectedItem();
-                    String room = textField3.getText();
-                    String name = textField4.getText();
-                    String check = textField5.getText();
-                    String amount = textField6.getText();
-                    C.statement.executeUpdate("update customer  set room = '"+room+"', name = '"+name+"', checkintime = '"+check+"', deposit = '"+amount+"' where number = '"+q+"'");
+                    con C = new con();
+                    String status = textField5.getText();
+                    C.statement.executeUpdate("update room set cleaning_status = '"+status+"' where room_number = " + textField3.getText());
+
                     JOptionPane.showMessageDialog(null, "Updated Successfully");
                     setVisible(false);
 
@@ -126,7 +102,7 @@ public class UpdateCheck extends JFrame {
 
 
         JButton back = new JButton("Back");
-        back.setBounds(168,378,89,23);
+        back.setBounds(180,355,89,23);
         back.setBackground(Color.BLACK);
         back.setForeground(Color.WHITE);
         panel.add(back);
@@ -138,7 +114,7 @@ public class UpdateCheck extends JFrame {
         });
 
         JButton check = new JButton("Check");
-        check.setBounds(281,378,89,23);
+        check.setBounds(60,355,89,23);
         check.setBackground(Color.BLACK);
         check.setForeground(Color.WHITE);
         panel.add(check);
@@ -153,17 +129,13 @@ public class UpdateCheck extends JFrame {
 
                     while (resultSet.next()){
                         textField3.setText(resultSet.getString("room"));
-                        textField4.setText(resultSet.getString("name"));
-                        textField5.setText(resultSet.getString("checkintime"));
-                        textField6.setText(resultSet.getString("deposit"));
                     }
 
                     ResultSet resultSet1 = c.statement.executeQuery("select * from room where room_number =  '"+textField3.getText()+"'");
 
                     while (resultSet1.next()){
-                        String price = resultSet1.getString("price");
-                        int amountPaid = Integer.parseInt(price) - Integer.parseInt(textField6.getText());
-                        textField7.setText(""+amountPaid);
+                        textField4.setText(resultSet1.getString("availability"));
+                        textField5.setText(resultSet1.getString("cleaning_status"));
                     }
                 }catch (Exception E ){
                     E.printStackTrace();
@@ -172,11 +144,12 @@ public class UpdateCheck extends JFrame {
         });
 
         setLayout(null);
-        setSize(950,500);
+        setSize(950,450);
         setLocation(400,200);
         setVisible(true);
     }
+
     public static void main(String[] args) {
-        new UpdateCheck();
+        new UpdateRoom();
     }
 }
