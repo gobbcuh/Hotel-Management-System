@@ -1,5 +1,7 @@
 package Hotel.Management.System;
 
+import net.proteanit.sql.DbUtils;
+
 import javax.swing.*;
 import java.awt.*;
 import java.sql.ResultSet;
@@ -14,13 +16,13 @@ public class PickUp extends JFrame {
 
         JLabel PUS = new JLabel("Pick Up Service");
         PUS.setBounds(90, 11, 160, 25);
-        PUS.setBackground(Color.WHITE);
+        PUS.setForeground(Color.WHITE);
         PUS.setFont(new Font("Tahoma", Font.BOLD, 20));
         panel.add(PUS);
 
-        JLabel TOC = new JLabel("Type of Card");
-        TOC.setBounds(32, 97, 160, 25);
-        TOC.setBackground(Color.WHITE);
+        JLabel TOC = new JLabel("Type of Car");
+        TOC.setBounds(32, 97, 89, 14);
+        TOC.setForeground(Color.WHITE);
         TOC.setFont(new Font("Tahoma", Font.PLAIN, 14));
         panel.add(TOC);
 
@@ -34,6 +36,22 @@ public class PickUp extends JFrame {
             while (resultSet.next()) {
                 c.add(resultSet.getString("car_name"));
             }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        JTable table = new JTable();
+        table.setBounds(10, 233, 800, 250);
+        table.setBackground(new Color(3, 45, 48));
+        table.setForeground(Color.WHITE);
+        panel.add(table);
+
+        try {
+            con C = new con();
+            String q = "select * from driver";
+            ResultSet resultSet = C.statement.executeQuery(q);
+            table.setModel(DbUtils.resultSetToTableModel(resultSet));
 
         } catch (Exception e) {
             e.printStackTrace();
