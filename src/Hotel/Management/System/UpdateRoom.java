@@ -15,10 +15,10 @@ public class UpdateRoom extends JFrame {
         add(panel);
 
         ImageIcon imageIcon = new ImageIcon(ClassLoader.getSystemResource("icon/covalent.png"));
-        Image image = imageIcon.getImage().getScaledInstance(295, 150, Image.SCALE_DEFAULT);
+        Image image = imageIcon.getImage().getScaledInstance(350, 205, Image.SCALE_DEFAULT);
         ImageIcon imageIcon1 = new ImageIcon(image);
         JLabel label = new JLabel(imageIcon1);
-        label.setBounds(550, 10, 295, 150);
+        label.setBounds(500, 100, 350, 205);
         panel.add(label);
 
         JLabel label1  = new JLabel("Update Room Status");

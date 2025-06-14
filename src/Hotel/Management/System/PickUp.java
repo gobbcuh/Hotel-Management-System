@@ -11,21 +11,21 @@ import java.sql.ResultSet;
 public class PickUp extends JFrame {
     PickUp() {
         JPanel panel = new JPanel();
-        panel.setBackground(new Color(3, 45, 48));
+        panel.setBackground(new Color(250, 213, 213));
         panel.setBounds(5, 5, 790, 590);
         panel.setLayout(null);
         add(panel);
 
         JLabel PUS = new JLabel("Pick Up Service");
-        PUS.setBounds(90, 11, 160, 25);
-        PUS.setForeground(Color.WHITE);
+        PUS.setBounds(300, 40, 160, 25);
+        PUS.setForeground(Color.BLACK);
         PUS.setFont(new Font("Tahoma", Font.BOLD, 20));
         panel.add(PUS);
 
         JLabel TOC = new JLabel("Type of Car");
-        TOC.setBounds(32, 97, 89, 14);
-        TOC.setForeground(Color.WHITE);
-        TOC.setFont(new Font("Tahoma", Font.PLAIN, 14));
+        TOC.setBounds(32, 97, 89, 17);
+        TOC.setForeground(Color.BLACK);
+        TOC.setFont(new Font("Tahoma", Font.BOLD, 14));
         panel.add(TOC);
 
         Choice c = new Choice();
@@ -45,8 +45,8 @@ public class PickUp extends JFrame {
 
         JTable table = new JTable();
         table.setBounds(10, 233, 800, 250);
-        table.setBackground(new Color(3, 45, 48));
-        table.setForeground(Color.WHITE);
+        table.setBackground(new Color(250, 213, 213));
+        table.setForeground(Color.BLACK);
         panel.add(table);
 
         try {
@@ -61,37 +61,37 @@ public class PickUp extends JFrame {
 
         JLabel name = new JLabel("Name");
         name.setBounds(24, 208, 46, 14);
-        name.setForeground(Color.WHITE);
+        name.setForeground(Color.BLACK);
         panel.add(name);
 
         JLabel age = new JLabel("Age");
         age.setBounds(165, 208, 46, 14);
-        age.setForeground(Color.WHITE);
+        age.setForeground(Color.BLACK);
         panel.add(age);
 
         JLabel gender = new JLabel("Sex");
         gender.setBounds(264, 208, 46, 14);
-        gender.setForeground(Color.WHITE);
+        gender.setForeground(Color.BLACK);
         panel.add(gender);
 
         JLabel company = new JLabel("Company");
         company.setBounds(366, 208, 100, 14);
-        company.setForeground(Color.WHITE);
+        company.setForeground(Color.BLACK);
         panel.add(company);
 
         JLabel carName = new JLabel("Car Name");
         carName.setBounds(486, 208, 100, 14);
-        carName.setForeground(Color.WHITE);
+        carName.setForeground(Color.BLACK);
         panel.add(carName);
 
         JLabel available = new JLabel("Available");
         available.setBounds(600, 208, 100, 14);
-        available.setForeground(Color.WHITE);
+        available.setForeground(Color.BLACK);
         panel.add(available);
 
         JLabel location = new JLabel("Location");
         location.setBounds(700, 208, 100, 14);
-        location.setForeground(Color.WHITE);
+        location.setForeground(Color.BLACK);
         panel.add(location);
 
         JButton display = new JButton("Display");
@@ -126,10 +126,10 @@ public class PickUp extends JFrame {
             }
         });
 
-
+        setUndecorated(true);
         setLayout(null);
         setSize(800, 600);
-        setLocation(500, 100);
+        setLocation(400, 55);
         setVisible(true);
     }
     public static void main(String[] args) {

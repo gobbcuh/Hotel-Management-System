@@ -16,58 +16,58 @@ public class SearchRoom extends JFrame implements ActionListener {
 
     SearchRoom(){
         JPanel panel = new JPanel();
-        panel.setBackground(new Color(3, 45, 48));
+        panel.setBackground(new Color(250, 213, 213));
         panel.setBounds(5, 5, 690, 490);
         panel.setLayout(null);
         add(panel);
 
         JLabel searchForRoom = new JLabel("Search for Room");
         searchForRoom.setBounds(250, 11, 186, 31);
-        searchForRoom.setForeground(Color.WHITE);
+        searchForRoom.setForeground(Color.BLACK);
         searchForRoom.setFont(new Font("Tahoma", Font.BOLD,20));
         panel.add(searchForRoom);
 
         JLabel rbt = new JLabel("Room Bed Type:");
         rbt.setBounds(50, 73, 120, 20);
-        rbt.setForeground(Color.WHITE);
+        rbt.setForeground(Color.BLACK);
         rbt.setFont(new Font("Tahoma", Font.BOLD,14));
         panel.add(rbt);
 
         JLabel rn = new JLabel("Room No.");
         rn.setBounds(23, 162, 150, 20);
-        rn.setForeground(Color.WHITE);
+        rn.setForeground(Color.BLACK);
         rn.setFont(new Font("Tahoma", Font.BOLD,14));
         panel.add(rn);
 
         JLabel available = new JLabel("Availability");
         available.setBounds(175, 162, 150, 20);
-        available.setForeground(Color.WHITE);
+        available.setForeground(Color.BLACK);
         available.setFont(new Font("Tahoma", Font.BOLD,14));
         panel.add(available);
 
         JLabel price = new JLabel("Price");
         price.setBounds(458, 162, 150, 20);
-        price.setForeground(Color.WHITE);
+        price.setForeground(Color.BLACK);
         price.setFont(new Font("Tahoma", Font.BOLD,14));
         panel.add(price);
 
         JLabel BT = new JLabel("Bed Type");
         BT.setBounds(580, 162, 150, 20);
-        BT.setForeground(Color.WHITE);
+        BT.setForeground(Color.BLACK);
         BT.setFont(new Font("Tahoma", Font.BOLD,14));
         panel.add(BT);
 
         JLabel SS = new JLabel("Clean Status");
         SS.setBounds(306, 162, 150, 20);
-        SS.setForeground(Color.WHITE);
+        SS.setForeground(Color.BLACK);
         SS.setFont(new Font("Tahoma", Font.BOLD,14));
         panel.add(SS);
 
 
         checkBox = new JCheckBox("Only Display Available");
         checkBox.setBounds(400, 69, 205, 23);
-        checkBox.setForeground(Color.WHITE);
-        checkBox.setBackground(new Color(3, 45, 48));
+        checkBox.setForeground(Color.BLACK);
+        checkBox.setBackground(new Color(250, 213, 213));
         panel.add(checkBox);
 
         choice = new Choice();
@@ -78,8 +78,8 @@ public class SearchRoom extends JFrame implements ActionListener {
 
         table = new JTable();
         table.setBounds(0, 187, 700, 150);
-        table.setBackground(new Color(3, 45, 48));
-        table.setForeground(Color.WHITE);
+        table.setBackground(new Color(250, 213, 213));
+        table.setForeground(Color.BLACK);
         panel.add(table);
 
         try {
@@ -108,7 +108,7 @@ public class SearchRoom extends JFrame implements ActionListener {
 
         setUndecorated(true);
         setLayout(null);
-        setLocation(500, 200);
+        setLocation(420, 100);
         setSize(700, 500);
         setVisible(true);
     }
