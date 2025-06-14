@@ -11,20 +11,27 @@ public class CheckOut extends JFrame {
     CheckOut() {
         JPanel panel = new JPanel();
         panel.setBounds(5, 5, 790, 390);
-        panel.setBackground(new Color(3, 45, 48));
+        panel.setBackground(new Color(250, 213, 213));
         panel.setLayout(null);
         add(panel);
+
+        ImageIcon imageIcon = new ImageIcon(ClassLoader.getSystemResource("icon/covalent.png"));
+        Image image = imageIcon.getImage().getScaledInstance(295, 170, Image.SCALE_DEFAULT);
+        ImageIcon imageIcon1 = new ImageIcon(image);
+        JLabel labelimg = new JLabel(imageIcon1);
+        labelimg.setBounds(440, 80, 295, 170);
+        panel.add(labelimg);
 
         JLabel label = new JLabel("Check Out");
         label.setBounds(100, 20, 150, 30);
         label.setFont(new Font("Tahoma", Font.BOLD, 20));
-        label.setForeground(Color.WHITE);
+        label.setForeground(Color.BLACK);
         panel.add(label);
 
         JLabel UserID = new JLabel("Customer ID");
         UserID.setBounds(30, 80, 150, 30);
         UserID.setFont(new Font("Tahoma", Font.BOLD, 14));
-        UserID.setForeground(Color.WHITE);
+        UserID.setForeground(Color.BLACK);
         panel.add(UserID);
 
         Choice Customer = new Choice();
@@ -34,39 +41,39 @@ public class CheckOut extends JFrame {
         JLabel roomNum = new JLabel("Room Number");
         roomNum.setBounds(30, 130, 150, 30);
         roomNum.setFont(new Font("Tahoma", Font.BOLD, 14));
-        roomNum.setForeground(Color.WHITE);
+        roomNum.setForeground(Color.BLACK);
         panel.add(roomNum);
 
         JLabel labelRoomNumber = new JLabel();
         labelRoomNumber.setBounds(200, 130, 150, 30);
-        labelRoomNumber.setFont(new Font("Tahoma", Font.BOLD, 14));
-        labelRoomNumber.setForeground(Color.WHITE);
+        labelRoomNumber.setFont(new Font("Tahoma", Font.PLAIN, 14));
+        labelRoomNumber.setForeground(Color.BLACK);
         panel.add(labelRoomNumber);
 
         JLabel checkinTime = new JLabel("Check In Time");
         checkinTime.setBounds(30, 180, 150, 30);
         checkinTime.setFont(new Font("Tahoma", Font.BOLD, 14));
-        checkinTime.setForeground(Color.WHITE);
+        checkinTime.setForeground(Color.BLACK);
         panel.add(checkinTime);
 
         JLabel labelCheckinTime = new JLabel();
         labelCheckinTime.setBounds(200, 180, 250, 30);
-        labelCheckinTime.setFont(new Font("Tahoma", Font.BOLD, 14));
-        labelCheckinTime.setForeground(Color.WHITE);
+        labelCheckinTime.setFont(new Font("Tahoma", Font.PLAIN, 14));
+        labelCheckinTime.setForeground(Color.BLACK);
         panel.add(labelCheckinTime);
 
         JLabel checkoutTime = new JLabel("Check Out Time");
         checkoutTime.setBounds(30, 230, 150, 30);
         checkoutTime.setFont(new Font("Tahoma", Font.BOLD, 14));
-        checkoutTime.setForeground(Color.WHITE);
+        checkoutTime.setForeground(Color.BLACK);
         panel.add(checkoutTime);
 
         Date date = new Date();
 
         JLabel LabelCheckoutTime = new JLabel(""+date);
         LabelCheckoutTime.setBounds(200, 230, 250, 30);
-        LabelCheckoutTime.setFont(new Font("Tahoma", Font.BOLD, 14));
-        LabelCheckoutTime.setForeground(Color.WHITE);
+        LabelCheckoutTime.setFont(new Font("Tahoma", Font.PLAIN, 14));
+        LabelCheckoutTime.setForeground(Color.BLACK);
         panel.add(LabelCheckoutTime);
 
         try {
@@ -126,7 +133,7 @@ public class CheckOut extends JFrame {
         });
 
         JButton back = new JButton("Back");
-        back.setBounds(170, 300, 120, 30);
+        back.setBounds(165, 300, 120, 30);
         back.setForeground(Color.WHITE);
         back.setBackground(Color.BLACK);
         panel.add(back);
@@ -140,7 +147,7 @@ public class CheckOut extends JFrame {
         setUndecorated(true);
         setLayout(null);
         setSize(800, 400);
-        setLocation(500, 210);
+        setLocation(385, 150);
         setVisible(true);
     }
 
