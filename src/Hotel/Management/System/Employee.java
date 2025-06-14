@@ -33,7 +33,7 @@ public class Employee extends JFrame {
         }
 
         JButton back = new JButton("Back");
-        back.setBounds(350, 500, 120, 30);
+        back.setBounds(380, 500, 120, 30);
         back.setBackground(Color.BLACK);
         back.setForeground(Color.WHITE);
         panel.add(back);
