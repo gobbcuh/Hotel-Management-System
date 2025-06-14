@@ -11,15 +11,15 @@ import java.sql.ResultSet;
 public class Department extends JFrame {
     Department() {
         JPanel panel = new JPanel();
-        panel.setBackground(new Color(3, 45, 48));
+        panel.setBackground(new Color(250, 213, 213));
         panel.setBounds(5, 5, 690, 490);
         panel.setLayout(null);
         add(panel);
 
         JTable table = new JTable();
-        table.setBounds(0, 40, 700, 350);
-        table.setBackground(new Color(4, 45, 48));
-        table.setForeground(Color.WHITE);
+        table.setBounds(100, 40, 500, 350);
+        table.setBackground(new Color(250, 213, 213));
+        table.setForeground(Color.BLACK);
         panel.add(table);
 
         try {
@@ -33,7 +33,7 @@ public class Department extends JFrame {
         }
 
         JButton back = new JButton("Back");
-        back.setBounds(400, 410, 120, 30);
+        back.setBounds(270, 410, 120, 30);
         back.setBackground(Color.BLACK);
         back.setForeground(Color.WHITE);
         panel.add(back);
@@ -45,20 +45,20 @@ public class Department extends JFrame {
         });
 
         JLabel label1 = new JLabel("Department");
-        label1.setBounds(145, 11, 105, 20);
-        label1.setForeground(Color.WHITE);
+        label1.setBounds(175, 11, 105, 20);
+        label1.setForeground(Color.BLACK);
         label1.setFont(new Font("Tahoma", Font.BOLD, 14));
         panel.add(label1);
 
         JLabel label2 = new JLabel("Budget");
-        label2.setBounds(431, 11, 105, 20);
-        label2.setForeground(Color.WHITE);
+        label2.setBounds(461, 11, 105, 20);
+        label2.setForeground(Color.BLACK);
         label2.setFont(new Font("Tahoma", Font.BOLD, 14));
         panel.add(label2);
 
         setUndecorated(true);
         setLayout(null);
-        setLocation(550, 150);
+        setLocation(430, 100);
         setSize(700, 500);
         setVisible(true);
     }
