@@ -40,7 +40,7 @@ public class Dashboard extends JFrame implements ActionListener {
         label11.setBounds(400, 300, 200, 195);
         add(label11); */
 
-        ImageIcon imageIcon = new ImageIcon(ClassLoader.getSystemResource("icon/dashboard.gif")); // to be uploaded
+        ImageIcon imageIcon = new ImageIcon(ClassLoader.getSystemResource("icon/dashboard.gif"));
         Image i1 = imageIcon.getImage().getScaledInstance(1280, 720, Image.SCALE_DEFAULT);
         ImageIcon imageIcon1 = new ImageIcon(i1);
         JLabel label = new JLabel(imageIcon1);

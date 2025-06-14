@@ -10,27 +10,27 @@ public class Reception extends JFrame {
         JPanel panel = new JPanel();
         panel.setLayout(null);
         panel.setBounds(280, 5, 1238, 820);
-        panel.setBackground(new Color(3, 45, 48));
+        panel.setBackground(new Color(250, 213, 213));
         add(panel);
 
         JPanel panel1 = new JPanel();
         panel1.setLayout(null);
         panel1.setBounds(5, 5, 270, 820);
-        panel1.setBackground(new Color(3, 45, 48));
+        panel1.setBackground(new Color(250, 213, 213));
         add(panel1);
 
-        ImageIcon i111 = new ImageIcon(ClassLoader.getSystemResource("icon/main.gif")); // to be uploaded
-        Image i22 = i111.getImage().getScaledInstance(800, 800, Image.SCALE_DEFAULT);
+        ImageIcon i111 = new ImageIcon(ClassLoader.getSystemResource("icon/reception.gif"));
+        Image i22 = i111.getImage().getScaledInstance(1010, 840, Image.SCALE_DEFAULT);
         ImageIcon imageIcon111 = new ImageIcon(i22);
         JLabel label11 = new JLabel(imageIcon111);
-        label11.setBounds(300, 20, 800, 800);
+        label11.setBounds(0, -50, 1010, 840);
         panel.add(label11);
 
-        ImageIcon i11 = new ImageIcon(ClassLoader.getSystemResource("icon/main.gif")); // to be uploaded
+        ImageIcon i11 = new ImageIcon(ClassLoader.getSystemResource("icon/reception2.gif")); // to be uploaded
         Image i2 = i11.getImage().getScaledInstance(250, 250, Image.SCALE_DEFAULT);
         ImageIcon imageIcon11 = new ImageIcon(i2);
         JLabel label1 = new JLabel(imageIcon11);
-        label1.setBounds(5, 530, 250, 250);
+        label1.setBounds(5, 515, 250, 250);
         panel1.add(label1);
 
         JButton btnNCF = new JButton("New Customer Form");
@@ -244,7 +244,8 @@ public class Reception extends JFrame {
 
         getContentPane().setBackground(Color.WHITE);
         setLayout(null);
-        setSize(1950, 1090);
+        setSize(1366, 768);
+        setLocation(-8, 0);
         setVisible(true);
     }
 
