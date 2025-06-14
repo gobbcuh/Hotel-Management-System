@@ -17,39 +17,39 @@ public class Register extends JFrame implements ActionListener {
 
     Register() {
         JLabel label1 = new JLabel("Username");
-        label1.setBounds(55, 120, 100, 30);
+        label1.setBounds(63, 170, 100, 30);
         label1.setFont(new Font("Tahoma", Font.BOLD, 16));
-        label1.setForeground(Color.WHITE);
+        label1.setForeground(Color.BLACK);
         add(label1);
 
         JLabel label2 = new JLabel("Password");
-        label2.setBounds(55, 170, 100, 30);
+        label2.setBounds(63, 220, 100, 30);
         label2.setFont(new Font("Tahoma", Font.BOLD, 16));
-        label2.setForeground(Color.WHITE);
+        label2.setForeground(Color.BLACK);
         add(label2);
 
         JLabel label3 = new JLabel("Confirm Password");
-        label3.setBounds(55, 220, 150, 30);
+        label3.setBounds(63, 270, 150, 30);
         label3.setFont(new Font("Tahoma", Font.BOLD, 16));
-        label3.setForeground(Color.WHITE);
+        label3.setForeground(Color.BLACK);
         add(label3);
 
         textField1 = new JTextField();
-        textField1.setBounds(230, 120, 150, 30);
-        textField1.setForeground(Color.WHITE);
-        textField1.setBackground(new Color(26, 104, 110));
+        textField1.setBounds(230, 170, 150, 30);
+        textField1.setForeground(Color.BLACK);
+        textField1.setBackground(Color.WHITE);
         add(textField1);
 
         passwordField1 = new JPasswordField();
-        passwordField1.setBounds(230, 170, 150, 30);
-        passwordField1.setForeground(Color.WHITE);
-        passwordField1.setBackground(new Color(26, 104, 110));
+        passwordField1.setBounds(230, 220, 150, 30);
+        passwordField1.setForeground(Color.BLACK);
+        passwordField1.setBackground(Color.WHITE);
         add(passwordField1);
 
         passwordField2 = new JPasswordField();
-        passwordField2.setBounds(230, 220, 150, 30);
-        passwordField2.setForeground(Color.WHITE);
-        passwordField2.setBackground(new Color(26, 104, 110));
+        passwordField2.setBounds(230, 270, 150, 30);
+        passwordField2.setForeground(Color.BLACK);
+        passwordField2.setBackground(Color.WHITE);
         add(passwordField2);
 
         /* ImageIcon imageIcon = new ImageIcon(ClassLoader.getSystemResource("icon/logo.png"));
@@ -59,7 +59,7 @@ public class Register extends JFrame implements ActionListener {
         add(label); */
 
         b1 = new JButton("Register");
-        b1.setBounds(90, 360, 120, 30);
+        b1.setBounds(90, 390, 120, 30);
         b1.setFont(new Font("Tahoma", Font.BOLD, 15));
         b1.setBackground(Color.BLACK);
         b1.setForeground(Color.WHITE);
@@ -67,17 +67,17 @@ public class Register extends JFrame implements ActionListener {
         add(b1);
 
         b2 = new JButton("Cancel");
-        b2.setBounds(230, 360, 120, 30);
+        b2.setBounds(230, 390, 120, 30);
         b2.setFont(new Font("Tahoma", Font.BOLD, 15));
         b2.setBackground(Color.BLACK);
         b2.setForeground(Color.WHITE);
         b2.addActionListener(this);
         add(b2);
 
-        JLabel loginLabel = new JLabel("<html>Already have an account? <a href='' style='text-decoration:none;color:white;'><b>Log in</b></a></html>");
-        loginLabel.setBounds(127, 400, 260, 30);
+        JLabel loginLabel = new JLabel("<html>Already have an account? <a href='' style='text-decoration:none;color:black;'><b>Log in</b></a></html>");
+        loginLabel.setBounds(127, 430, 260, 30);
         loginLabel.setFont(new Font("Arial", Font.PLAIN, 12));
-        loginLabel.setForeground(Color.WHITE);
+        loginLabel.setForeground(Color.BLACK);
         loginLabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
         add(loginLabel);
 
@@ -88,6 +88,11 @@ public class Register extends JFrame implements ActionListener {
                 setVisible(false);
             }
         });
+
+        ImageIcon imageIcon = new ImageIcon(ClassLoader.getSystemResource("icon/register.png")); // upload gif from canva
+        JLabel label = new JLabel(imageIcon);
+        label.setBounds(0, 0, 440, 580);
+        add(label);
 
         getContentPane().setBackground(new Color(3, 45, 48));
         setLayout(null);

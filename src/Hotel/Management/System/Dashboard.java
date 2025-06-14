@@ -48,7 +48,8 @@ public class Dashboard extends JFrame implements ActionListener {
         add(label);
 
         setLayout(null);
-        setSize(1950, 1090);
+        setSize(1366, 768);
+        setLocation(-8, 0);
         setVisible(true);
     }
 

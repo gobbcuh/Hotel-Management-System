@@ -30,13 +30,13 @@ public class Login extends JFrame implements ActionListener {
 
         textField1 = new JTextField();
         textField1.setBounds(200, 180, 150, 30);
-        textField1.setForeground(Color.WHITE);
+        textField1.setForeground(Color.BLACK);
         textField1.setBackground(Color.WHITE);
         add(textField1);
 
         passwordField1 = new JPasswordField();
         passwordField1.setBounds(200, 230, 150, 30);
-        passwordField1.setForeground(Color.WHITE);
+        passwordField1.setForeground(Color.BLACK);
         passwordField1.setBackground(Color.WHITE);
         add(passwordField1);
 
@@ -47,7 +47,7 @@ public class Login extends JFrame implements ActionListener {
         add(label); */
 
         b1 = new JButton("Login");
-        b1.setBounds(90, 360, 120, 30);
+        b1.setBounds(90, 380, 120, 30);
         b1.setFont(new Font("Tahoma", Font.BOLD, 15));
         b1.setBackground(Color.BLACK);
         b1.setForeground(Color.WHITE);
@@ -55,7 +55,7 @@ public class Login extends JFrame implements ActionListener {
         add(b1);
 
         b2 = new JButton("Cancel");
-        b2.setBounds(230, 360, 120, 30);
+        b2.setBounds(230, 380, 120, 30);
         b2.setFont(new Font("Tahoma", Font.BOLD, 15));
         b2.setBackground(Color.BLACK);
         b2.setForeground(Color.WHITE);
@@ -63,7 +63,7 @@ public class Login extends JFrame implements ActionListener {
         add(b2);
 
         JLabel registerLabel = new JLabel("<html>Don't have an account? <a href='' style='text-decoration:none;color:black;'><b>Register</b></a></html>");
-        registerLabel.setBounds(127, 400, 260, 30);
+        registerLabel.setBounds(127, 420, 260, 30);
         registerLabel.setFont(new Font("Arial", Font.PLAIN, 12));
         registerLabel.setForeground(Color.BLACK);
         registerLabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
