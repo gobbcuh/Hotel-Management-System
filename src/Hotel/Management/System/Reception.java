@@ -209,6 +209,39 @@ public class Reception extends JFrame {
             }
         });
 
+        JButton logout = new JButton("Log Out");
+        logout.setBounds(30, 470, 95, 30);
+        logout.setBackground(Color.BLACK);
+        logout.setForeground(Color.WHITE);
+        panel1.add(logout);
+        logout.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    System.exit(500);
+                } catch (Exception E) {
+                    E.printStackTrace();
+                }
+            }
+        });
+
+        JButton back = new JButton("Back");
+        back.setBounds(140, 470, 95, 30);
+        back.setBackground(Color.BLACK);
+        back.setForeground(Color.WHITE);
+        panel1.add(back);
+        back.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    setVisible(false);
+                    new Dashboard();
+                } catch (Exception E) {
+                    E.printStackTrace();
+                }
+            }
+        });
+
         getContentPane().setBackground(Color.WHITE);
         setLayout(null);
         setSize(1950, 1090);

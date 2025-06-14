@@ -130,6 +130,12 @@ public class CheckOut extends JFrame {
         back.setForeground(Color.WHITE);
         back.setBackground(Color.BLACK);
         panel.add(back);
+        back.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setVisible(false);
+            }
+        });
 
         setUndecorated(true);
         setLayout(null);
