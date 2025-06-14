@@ -17,55 +17,55 @@ public class Login extends JFrame implements ActionListener {
 
     Login() {
         JLabel label1 = new JLabel("Username");
-        label1.setBounds(40, 20, 100, 30);
+        label1.setBounds(90, 180, 100, 30);
         label1.setFont(new Font("Tahoma", Font.BOLD, 16));
-        label1.setForeground(Color.WHITE);
+        label1.setForeground(Color.BLACK);
         add(label1);
 
         JLabel label2 = new JLabel("Password");
-        label2.setBounds(40, 70, 100, 30);
+        label2.setBounds(90, 230, 100, 30);
         label2.setFont(new Font("Tahoma", Font.BOLD, 16));
-        label2.setForeground(Color.WHITE);
+        label2.setForeground(Color.BLACK);
         add(label2);
 
         textField1 = new JTextField();
-        textField1.setBounds(150, 20, 150, 30);
+        textField1.setBounds(200, 180, 150, 30);
         textField1.setForeground(Color.WHITE);
-        textField1.setBackground(new Color(26, 104, 110));
+        textField1.setBackground(Color.WHITE);
         add(textField1);
 
         passwordField1 = new JPasswordField();
-        passwordField1.setBounds(150, 70, 150, 30);
+        passwordField1.setBounds(200, 230, 150, 30);
         passwordField1.setForeground(Color.WHITE);
-        passwordField1.setBackground(new Color(26, 104, 110));
+        passwordField1.setBackground(Color.WHITE);
         add(passwordField1);
 
-        ImageIcon imageIcon = new ImageIcon(ClassLoader.getSystemResource("icon/logo.png"));
+        /* ImageIcon imageIcon = new ImageIcon(ClassLoader.getSystemResource("icon/logo.png"));
         Image i1 = imageIcon.getImage().getScaledInstance(666, 375, Image.SCALE_DEFAULT);
         JLabel label = new JLabel(imageIcon);
         label.setBounds(150, 120, 666, 375);
-        add(label);
+        add(label); */
 
         b1 = new JButton("Login");
-        b1.setBounds(40, 300, 120, 30);
-        b1.setFont(new Font("Serif", Font.BOLD, 15));
+        b1.setBounds(90, 360, 120, 30);
+        b1.setFont(new Font("Tahoma", Font.BOLD, 15));
         b1.setBackground(Color.BLACK);
         b1.setForeground(Color.WHITE);
         b1.addActionListener(this);
         add(b1);
 
         b2 = new JButton("Cancel");
-        b2.setBounds(180, 300, 120, 30);
-        b2.setFont(new Font("Serif", Font.BOLD, 15));
+        b2.setBounds(230, 360, 120, 30);
+        b2.setFont(new Font("Tahoma", Font.BOLD, 15));
         b2.setBackground(Color.BLACK);
         b2.setForeground(Color.WHITE);
         b2.addActionListener(this);
         add(b2);
 
-        JLabel registerLabel = new JLabel("<html>Don't have an account? <a href='' style='text-decoration:none;color:white;'>Register</a></html>");
-        registerLabel.setBounds(40, 340, 260, 30);
-        registerLabel.setFont(new Font("Serif", Font.PLAIN, 14));
-        registerLabel.setForeground(Color.WHITE);
+        JLabel registerLabel = new JLabel("<html>Don't have an account? <a href='' style='text-decoration:none;color:black;'><b>Register</b></a></html>");
+        registerLabel.setBounds(127, 400, 260, 30);
+        registerLabel.setFont(new Font("Arial", Font.PLAIN, 12));
+        registerLabel.setForeground(Color.BLACK);
         registerLabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
         add(registerLabel);
 
@@ -76,6 +76,11 @@ public class Login extends JFrame implements ActionListener {
                 setVisible(false);
             }
         });
+
+        ImageIcon imageIcon = new ImageIcon(ClassLoader.getSystemResource("icon/login.png")); // upload gif from canva
+        JLabel label = new JLabel(imageIcon);
+        label.setBounds(0, 0, 440, 580);
+        add(label);
 
         getContentPane().setBackground(new Color(3, 45, 48));
         setLayout(null);
