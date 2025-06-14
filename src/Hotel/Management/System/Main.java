@@ -8,12 +8,12 @@ public class Main extends JFrame {
     Main() {
         ImageIcon imageIcon = new ImageIcon(ClassLoader.getSystemResource("icon/main.gif")); // upload gif from canva
         JLabel label = new JLabel(imageIcon);
-        label.setBounds(0, -40, 1209, 690);
+        label.setBounds(0, -80, 1326, 848);
         add(label);
 
         setLayout(null);
-        setLocation(50, 5);
-        setSize(1209, 690);
+        setLocation(-8, 0);
+        setSize(1366, 768);
         setVisible(true);
 
         try {
