@@ -4,6 +4,8 @@ import net.proteanit.sql.DbUtils;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 
 public class PickUp extends JFrame {
@@ -97,12 +99,32 @@ public class PickUp extends JFrame {
         display.setBackground(Color.BLACK);
         display.setForeground(Color.WHITE);
         panel.add(display);
+        display.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String q = "select * from driver where car_name = '"+c.getSelectedItem()+"'";
+                try {
+                    con c = new con();
+                    ResultSet resultSet = c.statement.executeQuery(q);
+                    table.setModel(DbUtils.resultSetToTableModel(resultSet));
+
+                } catch (Exception E) {
+                    E.printStackTrace();
+                }
+            }
+        });
 
         JButton back = new JButton("Back");
         back.setBounds(420, 500, 120, 30);
         back.setBackground(Color.BLACK);
         back.setForeground(Color.WHITE);
         panel.add(back);
+        back.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setVisible(false);
+            }
+        });
 
 
         setLayout(null);
