@@ -87,7 +87,7 @@ public class Room extends JFrame {
 
         setUndecorated(true);
         setLayout(null);
-        setLocation(350, 80);
+        setLocation(330, 50);
         setSize(900, 600);
         setVisible(true);
     }
