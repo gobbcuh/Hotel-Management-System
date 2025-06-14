@@ -57,6 +57,41 @@ public class PickUp extends JFrame {
             e.printStackTrace();
         }
 
+        JLabel name = new JLabel("Name");
+        name.setBounds(24, 208, 46, 14);
+        name.setForeground(Color.WHITE);
+        panel.add(name);
+
+        JLabel age = new JLabel("Age");
+        age.setBounds(165, 208, 46, 14);
+        age.setForeground(Color.WHITE);
+        panel.add(age);
+
+        JLabel gender = new JLabel("Sex");
+        gender.setBounds(264, 208, 46, 14);
+        gender.setForeground(Color.WHITE);
+        panel.add(gender);
+
+        JLabel company = new JLabel("Company");
+        company.setBounds(366, 208, 46, 14);
+        company.setForeground(Color.WHITE);
+        panel.add(company);
+
+        JLabel carName = new JLabel("Car Name");
+        carName.setBounds(486, 208, 46, 14);
+        carName.setForeground(Color.WHITE);
+        panel.add(carName);
+
+        JLabel available = new JLabel("Available");
+        available.setBounds(600, 208, 46, 14);
+        available.setForeground(Color.WHITE);
+        panel.add(available);
+
+        JLabel location = new JLabel("Location");
+        location.setBounds(700, 208, 46, 14);
+        location.setForeground(Color.WHITE);
+        panel.add(location);
+
 
         setLayout(null);
         setSize(800, 600);
