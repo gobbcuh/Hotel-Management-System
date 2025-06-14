@@ -1,7 +1,10 @@
 package Hotel.Management.System;
 
+import net.proteanit.sql.DbUtils;
+
 import javax.swing.*;
 import java.awt.*;
+import java.sql.ResultSet;
 
 public class CustomerInfo extends JFrame {
     CustomerInfo() {
@@ -16,6 +19,17 @@ public class CustomerInfo extends JFrame {
         table.setBackground(new Color(3, 45, 48));
         table.setForeground(Color.WHITE);
         panel.add(table);
+
+        try {
+            con c = new con();
+            String q = "select * from customer";
+            ResultSet resultSet = c.statement.executeQuery(q);
+            table.setModel(DbUtils.resultSetToTableModel(resultSet));
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
 
         setLayout(null);
         setSize(900, 600);
