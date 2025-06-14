@@ -2,6 +2,7 @@ package Hotel.Management.System;
 
 import javax.swing.*;
 import java.awt.*;
+import java.sql.ResultSet;
 
 public class PickUp extends JFrame {
     PickUp() {
@@ -12,10 +13,31 @@ public class PickUp extends JFrame {
         add(panel);
 
         JLabel PUS = new JLabel("Pick Up Service");
-        PUS.setBounds(90, 11, 89, 14);
+        PUS.setBounds(90, 11, 160, 25);
         PUS.setBackground(Color.WHITE);
         PUS.setFont(new Font("Tahoma", Font.BOLD, 20));
         panel.add(PUS);
+
+        JLabel TOC = new JLabel("Type of Card");
+        TOC.setBounds(32, 97, 160, 25);
+        TOC.setBackground(Color.WHITE);
+        TOC.setFont(new Font("Tahoma", Font.PLAIN, 14));
+        panel.add(TOC);
+
+        Choice c = new Choice();
+        c.setBounds(123, 94, 150, 25);
+        panel.add(c);
+
+        try {
+            con C = new con();
+            ResultSet resultSet = C.statement.executeQuery("select * from driver");
+            while (resultSet.next()) {
+                c.add(resultSet.getString("car_name"));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
 
         setLayout(null);
