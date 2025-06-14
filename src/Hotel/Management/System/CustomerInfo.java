@@ -4,6 +4,8 @@ import net.proteanit.sql.DbUtils;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 
 public class CustomerInfo extends JFrame {
@@ -55,7 +57,7 @@ public class CustomerInfo extends JFrame {
         panel.add(gender);
 
         JLabel country = new JLabel("Country");
-        country.setBounds(480, 11, 100, 14);
+        country.setBounds(480, 11, 100, 25);
         country.setForeground(Color.WHITE);
         country.setFont(new Font("Tahoma", Font.BOLD, 14));
         panel.add(country);
@@ -73,12 +75,25 @@ public class CustomerInfo extends JFrame {
         panel.add(Time);
 
         JLabel deposit = new JLabel("Deposit");
-        deposit.setBounds(800, 11, 100, 14);
+        deposit.setBounds(800, 11, 100, 25);
         deposit.setForeground(Color.WHITE);
         deposit.setFont(new Font("Tahoma", Font.BOLD, 14));
         panel.add(deposit);
 
+        JButton back = new JButton("Back");
+        back.setBounds(450, 510, 120, 30);
+        back.setBackground(Color.BLACK);
+        back.setForeground(Color.WHITE);
+        panel.add(back);
+        back.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setVisible(false);
+            }
+        });
 
+
+        setUndecorated(true);
         setLayout(null);
         setSize(900, 600);
         setLocation(500, 100);
