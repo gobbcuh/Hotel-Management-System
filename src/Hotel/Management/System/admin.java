@@ -76,7 +76,7 @@ public class admin extends JFrame implements ActionListener {
         Image i1 = imageIcon.getImage().getScaledInstance(1280, 720, Image.SCALE_DEFAULT);
         ImageIcon imageIcon1 = new ImageIcon(i1);
         JLabel label = new JLabel(imageIcon1);
-        label.setBounds(0, -20, 1280, 720);
+        label.setBounds(0, -20, 1280, 690);
         add(label);
 
         getContentPane().setBackground(new Color(250, 213, 213));
