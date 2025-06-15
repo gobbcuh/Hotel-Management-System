@@ -1,10 +1,9 @@
-package Hotel.Management.System; // updates does not update
+package Hotel.Management.System;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.sql.ResultSet;
+import java.awt.event.*;
+import java.sql.*;
 
 public class UpdateRoom extends JFrame {
     UpdateRoom() {
@@ -21,13 +20,13 @@ public class UpdateRoom extends JFrame {
         label.setBounds(500, 100, 350, 205);
         panel.add(label);
 
-        JLabel label1  = new JLabel("Update Room Status");
+        JLabel label1 = new JLabel("Update Room Status");
         label1.setBounds(124,11,222,25);
         label1.setFont(new Font("Tahoma", Font.BOLD, 20));
         label1.setForeground(Color.BLACK);
         panel.add(label1);
 
-        JLabel label2  = new JLabel("ID :");
+        JLabel label2 = new JLabel("ID :");
         label2.setBounds(25,88,46,14);
         label2.setFont(new Font("Tahoma", Font.BOLD, 14));
         label2.setForeground(Color.BLACK);
@@ -43,11 +42,12 @@ public class UpdateRoom extends JFrame {
             while (resultSet.next()){
                 c.add(resultSet.getString("number"));
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error loading customer data: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
 
-        JLabel label3  = new JLabel("Room Number :");
+        JLabel label3 = new JLabel("Room Number :");
         label3.setBounds(25,129,120,14);
         label3.setFont(new Font("Tahoma", Font.BOLD, 14));
         label3.setForeground(Color.BLACK);
@@ -57,7 +57,7 @@ public class UpdateRoom extends JFrame {
         textField3.setBounds(248,129,140,20);
         panel.add(textField3);
 
-        JLabel label4  = new JLabel("Availability :");
+        JLabel label4 = new JLabel("Availability :");
         label4.setBounds(25,174,97,14);
         label4.setFont(new Font("Tahoma", Font.BOLD, 14));
         label4.setForeground(Color.BLACK);
@@ -67,7 +67,7 @@ public class UpdateRoom extends JFrame {
         textField4.setBounds(248,174,140,20);
         panel.add(textField4);
 
-        JLabel label5  = new JLabel("Clean Status :");
+        JLabel label5 = new JLabel("Clean Status :");
         label5.setBounds(25,216,97,14);
         label5.setFont(new Font("Tahoma", Font.BOLD, 14));
         label5.setForeground(Color.BLACK);
@@ -88,13 +88,22 @@ public class UpdateRoom extends JFrame {
                 try {
                     con C = new con();
                     String status = textField5.getText();
-                    C.statement.executeUpdate("update room set cleaning_status = '"+status+"' where room_number = " + textField3.getText());
+                    String availability = textField4.getText();
+                    String roomNumber = textField3.getText();
+
+                    String query = "update room set cleaning_status = ?, availability = ? where room_number = ?";
+                    PreparedStatement pstmt = C.connection.prepareStatement(query);
+                    pstmt.setString(1, status);
+                    pstmt.setString(2, availability);
+                    pstmt.setString(3, roomNumber);
+                    pstmt.executeUpdate();
+                    pstmt.close();
 
                     JOptionPane.showMessageDialog(null, "Updated Successfully");
                     setVisible(false);
-
-                }catch (Exception E){
+                } catch (Exception E) {
                     E.printStackTrace();
+                    JOptionPane.showMessageDialog(null, "Error updating room: " + E.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
         });
@@ -120,23 +129,31 @@ public class UpdateRoom extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String id = c.getSelectedItem();
-                String q = "select * from customer where number = '"+id+"'";
-                try{
-                    con c = new con();
-                    ResultSet resultSet = c.statement.executeQuery(q);
+                String q = "select * from customer where number = ?";
+                try {
+                    con C = new con();
+                    PreparedStatement pstmt = C.connection.prepareStatement(q);
+                    pstmt.setString(1, id);
+                    ResultSet resultSet = pstmt.executeQuery();
 
-                    while (resultSet.next()){
+                    while (resultSet.next()) {
                         textField3.setText(resultSet.getString("room"));
                     }
+                    pstmt.close();
 
-                    ResultSet resultSet1 = c.statement.executeQuery("select * from room where room_number =  '"+textField3.getText()+"'");
+                    String q2 = "select * from room where room_number = ?";
+                    PreparedStatement pstmt2 = C.connection.prepareStatement(q2);
+                    pstmt2.setString(1, textField3.getText());
+                    ResultSet resultSet1 = pstmt2.executeQuery();
 
-                    while (resultSet1.next()){
+                    while (resultSet1.next()) {
                         textField4.setText(resultSet1.getString("availability"));
                         textField5.setText(resultSet1.getString("cleaning_status"));
                     }
-                }catch (Exception E ){
+                    pstmt2.close();
+                } catch (Exception E) {
                     E.printStackTrace();
+                    JOptionPane.showMessageDialog(null, "Error checking room: " + E.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
         });
