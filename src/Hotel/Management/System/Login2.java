@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 public class Login2 extends JFrame implements ActionListener {
@@ -20,7 +21,7 @@ public class Login2 extends JFrame implements ActionListener {
 
         JLabel label2 = new JLabel("Password");
         label2.setBounds(90, 230, 100, 30);
-        label2.setFont(new Font("Tahoma", Font.BOLD, 16)); // change font
+        label2.setFont(new Font("Tahoma", Font.BOLD, 16));
         label2.setForeground(Color.BLACK);
         add(label2);
 
@@ -35,12 +36,6 @@ public class Login2 extends JFrame implements ActionListener {
         passwordField1.setForeground(Color.BLACK);
         passwordField1.setBackground(Color.WHITE);
         add(passwordField1);
-
-        /* ImageIcon imageIcon = new ImageIcon(ClassLoader.getSystemResource("icon/logo.png")); // upload image
-        Image i1 = imageIcon.getImage().getScaledInstance(666, 375, Image.SCALE_DEFAULT); // adjust if needed
-        JLabel label = new JLabel(imageIcon);
-        label.setBounds(150, 120, 666, 375); // adjust if needed
-        add(label); */
 
         b1 = new JButton("Login");
         b1.setBounds(90, 380, 120, 30);
@@ -78,21 +73,29 @@ public class Login2 extends JFrame implements ActionListener {
                 String user = textField1.getText();
                 String pass = passwordField1.getText();
 
-                String q = "select * from login2 where username = '"+user+"' and password = '"+pass+"'";
-                ResultSet resultSet = c.statement.executeQuery(q);
+                String q = "select * from login2 where username = ? and password = ?";
+                PreparedStatement pstmt = c.connection.prepareStatement(q);
+                pstmt.setString(1, user);
+                pstmt.setString(2, pass);
+                ResultSet resultSet = pstmt.executeQuery();
                 if (resultSet.next()) {
-                    new admin();
+                    Session.setAdmin(true); // Set admin status on successful login
+                    if (Session.isCalledFromUpdateRoom()) {
+                        new UpdateRoom(); // Return to UpdateRoom if called from there
+                        Session.setCalledFromUpdateRoom(false); // Reset the flag
+                    } else {
+                        new admin(); // Default to admin page if not from UpdateRoom
+                    }
                     setVisible(false);
                 } else {
                     JOptionPane.showMessageDialog(null, "Invalid");
                 }
-
+                pstmt.close();
             } catch (Exception E) {
                 E.printStackTrace();
             }
-
         } else {
-            new Dashboard();
+            new Dashboard(); // Return to dashboard on cancel
             setVisible(false);
         }
     }

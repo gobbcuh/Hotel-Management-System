@@ -6,6 +6,7 @@ import java.awt.Image;
 import java.awt.Cursor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.swing.*;
 
@@ -40,12 +41,6 @@ public class Login extends JFrame implements ActionListener {
         passwordField1.setBackground(Color.WHITE);
         add(passwordField1);
 
-        /* ImageIcon imageIcon = new ImageIcon(ClassLoader.getSystemResource("icon/logo.png"));
-        Image i1 = imageIcon.getImage().getScaledInstance(666, 375, Image.SCALE_DEFAULT);
-        JLabel label = new JLabel(imageIcon);
-        label.setBounds(150, 120, 666, 375);
-        add(label); */
-
         b1 = new JButton("Login");
         b1.setBounds(90, 380, 120, 30);
         b1.setFont(new Font("Tahoma", Font.BOLD, 15));
@@ -77,7 +72,7 @@ public class Login extends JFrame implements ActionListener {
             }
         });
 
-        ImageIcon imageIcon = new ImageIcon(ClassLoader.getSystemResource("icon/login.png")); // upload gif from canva
+        ImageIcon imageIcon = new ImageIcon(ClassLoader.getSystemResource("icon/login.png"));
         JLabel label = new JLabel(imageIcon);
         label.setBounds(0, 0, 440, 580);
         add(label);
@@ -97,19 +92,22 @@ public class Login extends JFrame implements ActionListener {
                 String user = textField1.getText();
                 String pass = new String(passwordField1.getPassword());
 
-                String q = "select * from login where username = '"+user+"' and password = '"+pass+"'";
-                ResultSet resultSet = c.statement.executeQuery(q);
+                String q = "select * from login where username = ? and password = ?";
+                PreparedStatement pstmt = c.connection.prepareStatement(q);
+                pstmt.setString(1, user);
+                pstmt.setString(2, pass);
+                ResultSet resultSet = pstmt.executeQuery();
                 if (resultSet.next()) {
+                    Session.setAdmin(false); // Set non-admin status for regular users
                     new Dashboard();
                     setVisible(false);
                 } else {
                     JOptionPane.showMessageDialog(null, "Invalid username or password");
                 }
-
+                pstmt.close();
             } catch (Exception E) {
                 E.printStackTrace();
             }
-
         } else if (e.getSource() == b2) {
             System.exit(102);
         }

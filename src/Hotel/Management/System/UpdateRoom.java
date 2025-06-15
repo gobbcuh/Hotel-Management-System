@@ -7,6 +7,15 @@ import java.sql.*;
 
 public class UpdateRoom extends JFrame {
     UpdateRoom() {
+        // Check if the user is an admin using Session
+        if (!Session.isAdmin()) {
+            Session.setCalledFromUpdateRoom(true); // Indicate this call is from UpdateRoom
+            JOptionPane.showMessageDialog(null, "Only admin is allowed to update room status. Please log in as admin.");
+            new Login2();
+            dispose(); // Close the UpdateRoom window
+            return;
+        }
+
         JPanel panel = new JPanel();
         panel.setBounds(5,5,940,490);
         panel.setBackground(new Color(250, 213, 213));
@@ -100,7 +109,9 @@ public class UpdateRoom extends JFrame {
                     pstmt.close();
 
                     JOptionPane.showMessageDialog(null, "Updated Successfully");
-                    setVisible(false);
+                    // Optionally log out and redirect to Reception after update
+                    // Uncomment the next line if you want logout after every update
+                    // logoutAndRedirectToReception();
                 } catch (Exception E) {
                     E.printStackTrace();
                     JOptionPane.showMessageDialog(null, "Error updating room: " + E.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -109,7 +120,7 @@ public class UpdateRoom extends JFrame {
         });
 
         JButton back = new JButton("Back");
-        back.setBounds(180,345,89,23);
+        back.setBounds(120,345,89,23);
         back.setBackground(Color.BLACK);
         back.setForeground(Color.WHITE);
         panel.add(back);
@@ -121,7 +132,7 @@ public class UpdateRoom extends JFrame {
         });
 
         JButton check = new JButton("Check");
-        check.setBounds(60,345,89,23);
+        check.setBounds(240,300,89,23);
         check.setBackground(Color.BLACK);
         check.setForeground(Color.WHITE);
         panel.add(check);
@@ -158,11 +169,30 @@ public class UpdateRoom extends JFrame {
             }
         });
 
+        JButton logout = new JButton("Log Out");
+        logout.setBounds(240, 345, 89, 23);
+        logout.setBackground(Color.BLACK);
+        logout.setForeground(Color.WHITE);
+        panel.add(logout);
+        logout.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                logoutAndRedirectToReception();
+            }
+        });
+
         setUndecorated(true);
         setLayout(null);
         setSize(950,450);
         setLocation(305,135);
         setVisible(true);
+    }
+
+    private void logoutAndRedirectToReception() {
+        Session.setAdmin(false); // Reset admin status
+        Session.setCalledFromUpdateRoom(false); // Reset context
+        new Reception();
+        setVisible(false);
     }
 
     public static void main(String[] args) {
