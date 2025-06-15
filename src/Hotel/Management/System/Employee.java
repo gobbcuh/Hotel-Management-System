@@ -4,9 +4,8 @@ import net.proteanit.sql.DbUtils;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.sql.ResultSet;
+import java.awt.event.*;
+import java.sql.*;
 
 public class Employee extends JFrame {
     Employee() {
@@ -16,24 +15,30 @@ public class Employee extends JFrame {
         panel.setLayout(null);
         add(panel);
 
+        JLabel title = new JLabel("Customer Reference");
+        title.setBounds(350, 20, 300, 25);
+        title.setFont(new Font("Tahoma", Font.BOLD, 20));
+        title.setForeground(Color.BLACK);
+        panel.add(title);
+
         JTable table = new JTable();
-        table.setBounds(10, 34, 980, 450);
+        table.setBounds(10, 80, 980, 424);
         table.setForeground(Color.BLACK);
         table.setBackground(new Color(250, 213, 213));
         panel.add(table);
 
         try {
             con c = new con();
-            String EmployeeSQL = "select * from employee";
+            String EmployeeSQL = "select name, gender, job, phone, email from employee";
             ResultSet resultSet = c.statement.executeQuery(EmployeeSQL);
             table.setModel(DbUtils.resultSetToTableModel(resultSet));
-
         } catch (Exception e) {
             e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error loading employee data: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
 
         JButton back = new JButton("Back");
-        back.setBounds(380, 500, 120, 30);
+        back.setBounds(400, 500, 120, 30);
         back.setBackground(Color.BLACK);
         back.setForeground(Color.WHITE);
         panel.add(back);
@@ -45,52 +50,34 @@ public class Employee extends JFrame {
         });
 
         JLabel name = new JLabel("Name");
-        name.setBounds(41, 11, 70, 19);
+        name.setBounds(75, 60, 70, 19);
         name.setForeground(Color.BLACK);
         name.setFont(new Font("Tahoma", Font.BOLD, 14));
         panel.add(name);
 
-        JLabel Age = new JLabel("Age");
-        Age.setBounds(159, 11, 70, 19);
-        Age.setForeground(Color.BLACK);
-        Age.setFont(new Font("Tahoma", Font.BOLD, 14));
-        panel.add(Age);
-
         JLabel gender = new JLabel("Sex");
-        gender.setBounds(273, 11, 70, 19);
+        gender.setBounds(285, 60, 70, 19);
         gender.setForeground(Color.BLACK);
         gender.setFont(new Font("Tahoma", Font.BOLD, 14));
         panel.add(gender);
 
-        JLabel job = new JLabel("Job");
-        job.setBounds(416, 11, 70, 19);
+        JLabel job = new JLabel("Role");
+        job.setBounds(475, 60, 70, 19);
         job.setForeground(Color.BLACK);
         job.setFont(new Font("Tahoma", Font.BOLD, 14));
         panel.add(job);
 
-        JLabel salary = new JLabel("Salary");
-        salary.setBounds(536, 11, 70, 19);
-        salary.setForeground(Color.BLACK);
-        salary.setFont(new Font("Tahoma", Font.BOLD, 14));
-        panel.add(salary);
-
         JLabel phone = new JLabel("Phone");
-        phone.setBounds(656, 11, 70, 19);
+        phone.setBounds(665, 60, 70, 19);
         phone.setForeground(Color.BLACK);
         phone.setFont(new Font("Tahoma", Font.BOLD, 14));
         panel.add(phone);
 
         JLabel email = new JLabel("Email");
-        email.setBounds(786, 11, 70, 19);
+        email.setBounds(865, 60, 70, 19);
         email.setForeground(Color.BLACK);
         email.setFont(new Font("Tahoma", Font.BOLD, 14));
         panel.add(email);
-
-        JLabel natID = new JLabel("PhilSys No.");
-        natID.setBounds(896, 11, 100, 19);
-        natID.setForeground(Color.BLACK);
-        natID.setFont(new Font("Tahoma", Font.BOLD, 14));
-        panel.add(natID);
 
         setUndecorated(true);
         setLayout(null);

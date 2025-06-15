@@ -72,12 +72,12 @@ public class AddRoom extends JFrame implements ActionListener {
         t5.setBackground(Color.WHITE);
         panel.add(t5);
 
-        JLabel l6 = new JLabel("Bed Type");
+        JLabel l6 = new JLabel("Room Type");
         l6.setBounds(64, 230, 152, 22);
         l6.setFont(new Font("Tahoma", Font.BOLD, 14));
         l6.setForeground(Color.BLACK);
         panel.add(l6);
-        t6 = new JComboBox(new String[] {"Single Bed", "Double Bed"});
+        t6 = new JComboBox(new String[] {"Proton Room", "Neutron Room", "Electron Suite"});
         t6.setBounds(200, 230, 156, 20);
         t6.setFont(new Font("Tahoma", Font.PLAIN, 14));
         t6.setForeground(Color.BLACK);
