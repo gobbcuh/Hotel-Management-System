@@ -8,7 +8,7 @@ public class Main extends JFrame {
     Main() {
         ImageIcon imageIcon = new ImageIcon(ClassLoader.getSystemResource("icon/main.gif")); // upload gif from canva
         JLabel label = new JLabel(imageIcon);
-        label.setBounds(0, -80, 1326, 848);
+        label.setBounds(0, -80, 1290, 800);
         add(label);
 
         setLayout(null);
