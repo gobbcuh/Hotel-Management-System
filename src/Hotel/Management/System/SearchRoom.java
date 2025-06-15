@@ -34,31 +34,31 @@ public class SearchRoom extends JFrame implements ActionListener {
         panel.add(rbt);
 
         JLabel rn = new JLabel("Room No.");
-        rn.setBounds(23, 162, 150, 20);
+        rn.setBounds(23, 111, 150, 20);
         rn.setForeground(Color.BLACK);
         rn.setFont(new Font("Tahoma", Font.BOLD,14));
         panel.add(rn);
 
         JLabel available = new JLabel("Availability");
-        available.setBounds(175, 162, 150, 20);
+        available.setBounds(175, 111, 150, 20);
         available.setForeground(Color.BLACK);
         available.setFont(new Font("Tahoma", Font.BOLD,14));
         panel.add(available);
 
         JLabel price = new JLabel("Price");
-        price.setBounds(458, 162, 150, 20);
+        price.setBounds(458, 111, 150, 20);
         price.setForeground(Color.BLACK);
         price.setFont(new Font("Tahoma", Font.BOLD,14));
         panel.add(price);
 
         JLabel BT = new JLabel("Bed Type");
-        BT.setBounds(580, 162, 150, 20);
+        BT.setBounds(580, 111, 150, 20);
         BT.setForeground(Color.BLACK);
         BT.setFont(new Font("Tahoma", Font.BOLD,14));
         panel.add(BT);
 
         JLabel SS = new JLabel("Clean Status");
-        SS.setBounds(306, 162, 150, 20);
+        SS.setBounds(306, 111, 150, 20);
         SS.setForeground(Color.BLACK);
         SS.setFont(new Font("Tahoma", Font.BOLD,14));
         panel.add(SS);
@@ -71,13 +71,14 @@ public class SearchRoom extends JFrame implements ActionListener {
         panel.add(checkBox);
 
         choice = new Choice();
-        choice.add("Single Bed");
-        choice.add("Double Bed");
+        choice.add("Proton Room");
+        choice.add("Neutron Room");
+        choice.add("Electron Suite");
         choice.setBounds(172, 70, 120, 20);
         panel.add(choice);
 
         table = new JTable();
-        table.setBounds(0, 187, 700, 150);
+        table.setBounds(10, 140, 700, 250);
         table.setBackground(new Color(250, 213, 213));
         table.setForeground(Color.BLACK);
         panel.add(table);

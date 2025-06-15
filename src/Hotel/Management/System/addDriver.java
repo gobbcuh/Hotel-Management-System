@@ -2,8 +2,8 @@ package Hotel.Management.System;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
+import java.sql.*;
 
 public class addDriver extends JFrame implements ActionListener {
     JTextField nameText, ageText, carCText, carNText, locText;
@@ -83,12 +83,12 @@ public class addDriver extends JFrame implements ActionListener {
         carNText.setBackground(Color.WHITE);
         panel.add(carNText);
 
-        JLabel available = new JLabel("Available");
+        JLabel available = new JLabel("Availability");
         available.setBounds(64, 270, 102, 22);
         available.setFont(new Font("Tahoma", Font.BOLD, 14));
         available.setForeground(Color.BLACK);
         panel.add(available);
-        comboBox1 = new JComboBox(new String[] {"Yes", "No"});
+        comboBox1 = new JComboBox(new String[] {"Available", "Occupied"});
         comboBox1.setBounds(176, 270, 154, 20);
         comboBox1.setForeground(Color.BLACK);
         comboBox1.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -121,7 +121,7 @@ public class addDriver extends JFrame implements ActionListener {
         back.addActionListener(this);
         panel.add(back);
 
-        ImageIcon imageIcon = new ImageIcon(ClassLoader.getSystemResource("icon/covalent.png")); // to be uploaded
+        ImageIcon imageIcon = new ImageIcon(ClassLoader.getSystemResource("icon/covalent.png"));
         Image image = imageIcon.getImage().getScaledInstance(370, 200, Image.SCALE_DEFAULT);
         ImageIcon imageIcon1 = new ImageIcon(image);
         JLabel label1 = new JLabel(imageIcon1);
@@ -138,25 +138,39 @@ public class addDriver extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == add) {
-            String name = nameText.getText();
-            String age = ageText.getText();
+            String name = nameText.getText().trim();
+            String age = ageText.getText().trim();
             String gender = (String) comboBox.getSelectedItem();
-            String company = carCText.getText();
-            String carName = carNText.getText();
+            String company = carCText.getText().trim();
+            String carName = carNText.getText().trim();
             String available = (String) comboBox1.getSelectedItem();
-            String location = locText.getText();
+            String location = locText.getText().trim();
+
+            if (name.isEmpty() || age.isEmpty() || company.isEmpty() || carName.isEmpty() || location.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Please fill all fields", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
 
             try {
                 con c = new con();
-                String q = "insert into driver values('"+name+"', '"+age+"', '"+gender+"', '"+company+"', '"+carName+"', '"+available+"', '"+location+"')";
-                c.statement.executeUpdate(q);
+                String q = "insert into driver values (?, ?, ?, ?, ?, ?, ?)";
+                PreparedStatement pstmt = c.connection.prepareStatement(q);
+                pstmt.setString(1, name);
+                pstmt.setString(2, age);
+                pstmt.setString(3, gender);
+                pstmt.setString(4, company);
+                pstmt.setString(5, carName);
+                pstmt.setString(6, available);
+                pstmt.setString(7, location);
+                pstmt.executeUpdate();
+                pstmt.close();
+
                 JOptionPane.showMessageDialog(null, "Driver Added");
                 setVisible(false);
-
             } catch (Exception E) {
                 E.printStackTrace();
+                JOptionPane.showMessageDialog(null, "Error adding driver: " + E.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
-
         } else {
             setVisible(false);
         }
