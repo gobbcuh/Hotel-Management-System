@@ -4,8 +4,6 @@
       <root url="jar://$PROJECT_DIR$/ResultSet2xml.jar!/" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES>
-      <root url="jar://$PROJECT_DIR$/ResultSet2xml.jar!/src" />
-    </SOURCES>
+    <SOURCES />
   </library>
 </component>
