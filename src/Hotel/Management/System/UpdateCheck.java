@@ -126,7 +126,6 @@ public class UpdateCheck extends JFrame {
         textField7.setEditable(false);
         panel.add(textField7);
 
-        // Update price and pending amount based on Room Number and Duration
         ItemListener priceUpdater = e -> {
             String room = textField3.getText();
             String duration = (String) durationComboBox.getSelectedItem();
@@ -144,7 +143,6 @@ public class UpdateCheck extends JFrame {
                         roomType = "Electron Suite";
                     }
                 } catch (NumberFormatException ex) {
-                    // Handle invalid room number
                 }
                 switch (roomType) {
                     case "Proton Room":
