@@ -34,10 +34,9 @@ public class Room extends JFrame {
 
         try {
             con c = new con();
-            String RoomInfo = "select * from room";
-            ResultSet resultSet = c.statement.executeQuery(RoomInfo);
+            String roomInfo = "SELECT room_number, availability, cleaning_status, price, bed_type FROM room";
+            ResultSet resultSet = c.statement.executeQuery(roomInfo);
             table.setModel(DbUtils.resultSetToTableModel(resultSet));
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -51,7 +50,6 @@ public class Room extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 setVisible(false);
-
             }
         });
 
@@ -61,29 +59,29 @@ public class Room extends JFrame {
         room.setFont(new Font("Tahoma", Font.BOLD, 14));
         panel.add(room);
 
-        JLabel availability = new JLabel("Availability");
+        JLabel availability = new JLabel("Status");
         availability.setBounds(122, 15, 80, 19);
         availability.setForeground(Color.BLACK);
         availability.setFont(new Font("Tahoma", Font.BOLD, 14));
         panel.add(availability);
 
-        JLabel Clean = new JLabel("Clean Status");
-        Clean.setBounds(219, 15, 150, 19);
-        Clean.setForeground(Color.BLACK);
-        Clean.setFont(new Font("Tahoma", Font.BOLD, 14));
-        panel.add(Clean);
+        JLabel clean = new JLabel("Clean Status");
+        clean.setBounds(219, 15, 150, 19);
+        clean.setForeground(Color.BLACK);
+        clean.setFont(new Font("Tahoma", Font.BOLD, 14));
+        panel.add(clean);
 
-        JLabel Price = new JLabel("Price");
-        Price.setBounds(333, 15, 80, 19);
-        Price.setForeground(Color.BLACK);
-        Price.setFont(new Font("Tahoma", Font.BOLD, 14));
-        panel.add(Price);
+        JLabel price = new JLabel("Price");
+        price.setBounds(333, 15, 80, 19);
+        price.setForeground(Color.BLACK);
+        price.setFont(new Font("Tahoma", Font.BOLD, 14));
+        panel.add(price);
 
-        JLabel Bed = new JLabel("Bed Type");
-        Bed.setBounds(420, 15, 80, 19);
-        Bed.setForeground(Color.BLACK);
-        Bed.setFont(new Font("Tahoma", Font.BOLD, 14));
-        panel.add(Bed);
+        JLabel bed = new JLabel("Bed Type");
+        bed.setBounds(420, 15, 80, 19);
+        bed.setForeground(Color.BLACK);
+        bed.setFont(new Font("Tahoma", Font.BOLD, 14));
+        panel.add(bed);
 
         setUndecorated(true);
         setLayout(null);

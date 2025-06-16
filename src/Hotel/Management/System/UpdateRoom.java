@@ -4,20 +4,22 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class UpdateRoom extends JFrame {
     UpdateRoom() {
         // Check if the user is an admin using Session
         if (!Session.isAdmin()) {
-            Session.setCalledFromUpdateRoom(true); // Indicate this call is from UpdateRoom
+            Session.setCalledFromUpdateRoom(true);
             JOptionPane.showMessageDialog(null, "Only admin is allowed to update room status. Please log in as admin.");
             new Login2();
-            dispose(); // Close the UpdateRoom window
+            dispose();
             return;
         }
 
         JPanel panel = new JPanel();
-        panel.setBounds(5,5,940,490);
+        panel.setBounds(5, 5, 940, 490);
         panel.setBackground(new Color(250, 213, 213));
         panel.setLayout(null);
         add(panel);
@@ -30,64 +32,54 @@ public class UpdateRoom extends JFrame {
         panel.add(label);
 
         JLabel label1 = new JLabel("Update Room Status");
-        label1.setBounds(124,11,222,25);
+        label1.setBounds(124, 11, 222, 25);
         label1.setFont(new Font("Tahoma", Font.BOLD, 20));
         label1.setForeground(Color.BLACK);
         panel.add(label1);
 
-        JLabel label2 = new JLabel("ID :");
-        label2.setBounds(25,88,46,14);
+        JLabel label2 = new JLabel("Room Number:");
+        label2.setBounds(25, 88, 120, 14);
         label2.setFont(new Font("Tahoma", Font.BOLD, 14));
         label2.setForeground(Color.BLACK);
         panel.add(label2);
 
         Choice c = new Choice();
-        c.setBounds(248,85,140,20);
+        c.setBounds(248, 85, 140, 20);
         panel.add(c);
 
         try {
             con C = new con();
-            ResultSet resultSet = C.statement.executeQuery("select * from customer");
-            while (resultSet.next()){
-                c.add(resultSet.getString("number"));
+            ResultSet resultSet = C.statement.executeQuery("select room_number from room");
+            while (resultSet.next()) {
+                c.add(resultSet.getString("room_number"));
             }
         } catch (Exception e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Error loading customer data: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error loading room data: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
 
-        JLabel label3 = new JLabel("Room Number :");
-        label3.setBounds(25,129,120,14);
+        JLabel label3 = new JLabel("Availability:");
+        label3.setBounds(25, 129, 120, 14);
         label3.setFont(new Font("Tahoma", Font.BOLD, 14));
         label3.setForeground(Color.BLACK);
         panel.add(label3);
 
         JTextField textField3 = new JTextField();
-        textField3.setBounds(248,129,140,20);
+        textField3.setBounds(248, 129, 140, 20);
         panel.add(textField3);
 
-        JLabel label4 = new JLabel("Availability :");
-        label4.setBounds(25,174,97,14);
+        JLabel label4 = new JLabel("Clean Status:");
+        label4.setBounds(25, 174, 120, 14);
         label4.setFont(new Font("Tahoma", Font.BOLD, 14));
         label4.setForeground(Color.BLACK);
         panel.add(label4);
 
         JTextField textField4 = new JTextField();
-        textField4.setBounds(248,174,140,20);
+        textField4.setBounds(248, 174, 140, 20);
         panel.add(textField4);
 
-        JLabel label5 = new JLabel("Clean Status :");
-        label5.setBounds(25,216,97,14);
-        label5.setFont(new Font("Tahoma", Font.BOLD, 14));
-        label5.setForeground(Color.BLACK);
-        panel.add(label5);
-
-        JTextField textField5 = new JTextField();
-        textField5.setBounds(248,216,140,20);
-        panel.add(textField5);
-
         JButton update = new JButton("Update");
-        update.setBounds(120,300,89,23);
+        update.setBounds(120, 300, 89, 23);
         update.setBackground(Color.BLACK);
         update.setForeground(Color.WHITE);
         panel.add(update);
@@ -96,11 +88,11 @@ public class UpdateRoom extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 try {
                     con C = new con();
-                    String status = textField5.getText();
-                    String availability = textField4.getText();
-                    String roomNumber = textField3.getText();
+                    String status = textField4.getText();
+                    String availability = textField3.getText();
+                    String roomNumber = c.getSelectedItem();
 
-                    String query = "update room set cleaning_status = ?, availability = ? where room_number = ?";
+                    String query = "UPDATE room SET cleaning_status = ?, availability = ? WHERE room_number = ?";
                     PreparedStatement pstmt = C.connection.prepareStatement(query);
                     pstmt.setString(1, status);
                     pstmt.setString(2, availability);
@@ -108,10 +100,7 @@ public class UpdateRoom extends JFrame {
                     pstmt.executeUpdate();
                     pstmt.close();
 
-                    JOptionPane.showMessageDialog(null, "Updated Successfully");
-                    // Optionally log out and redirect to Reception after update
-                    // Uncomment the next line if you want logout after every update
-                    // logoutAndRedirectToReception();
+                    JOptionPane.showMessageDialog(null, "Room Updated Successfully");
                 } catch (Exception E) {
                     E.printStackTrace();
                     JOptionPane.showMessageDialog(null, "Error updating room: " + E.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -120,7 +109,7 @@ public class UpdateRoom extends JFrame {
         });
 
         JButton back = new JButton("Back");
-        back.setBounds(120,345,89,23);
+        back.setBounds(120, 345, 89, 23);
         back.setBackground(Color.BLACK);
         back.setForeground(Color.WHITE);
         panel.add(back);
@@ -132,39 +121,91 @@ public class UpdateRoom extends JFrame {
         });
 
         JButton check = new JButton("Check");
-        check.setBounds(240,300,89,23);
+        check.setBounds(240, 300, 89, 23);
         check.setBackground(Color.BLACK);
         check.setForeground(Color.WHITE);
         panel.add(check);
         check.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String id = c.getSelectedItem();
-                String q = "select * from customer where number = ?";
+                String roomNumber = c.getSelectedItem();
                 try {
                     con C = new con();
+                    String q = "SELECT * FROM room WHERE room_number = ?";
                     PreparedStatement pstmt = C.connection.prepareStatement(q);
-                    pstmt.setString(1, id);
+                    pstmt.setString(1, roomNumber);
                     ResultSet resultSet = pstmt.executeQuery();
-
-                    while (resultSet.next()) {
-                        textField3.setText(resultSet.getString("room"));
+                    if (resultSet.next()) {
+                        textField3.setText(resultSet.getString("availability"));
+                        textField4.setText(resultSet.getString("cleaning_status"));
                     }
                     pstmt.close();
-
-                    String q2 = "select * from room where room_number = ?";
-                    PreparedStatement pstmt2 = C.connection.prepareStatement(q2);
-                    pstmt2.setString(1, textField3.getText());
-                    ResultSet resultSet1 = pstmt2.executeQuery();
-
-                    while (resultSet1.next()) {
-                        textField4.setText(resultSet1.getString("availability"));
-                        textField5.setText(resultSet1.getString("cleaning_status"));
-                    }
-                    pstmt2.close();
                 } catch (Exception E) {
                     E.printStackTrace();
                     JOptionPane.showMessageDialog(null, "Error checking room: " + E.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
+
+        JButton processReservation = new JButton("Process Reservation");
+        processReservation.setBounds(360, 340, 200, 23);
+        processReservation.setBackground(Color.BLACK);
+        processReservation.setForeground(Color.WHITE);
+        panel.add(processReservation);
+        processReservation.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String roomNumber = c.getSelectedItem();
+                try {
+                    con C = new con();
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                    String today = sdf.format(new Date());
+
+                    String reservationQuery = "SELECT * FROM reservations WHERE room_number = ? AND checkin_date LIKE ? AND status = 'Pending'";
+                    PreparedStatement resStmt = C.connection.prepareStatement(reservationQuery);
+                    resStmt.setString(1, roomNumber);
+                    resStmt.setString(2, today + "%");
+                    ResultSet resRs = resStmt.executeQuery();
+                    if (!resRs.next()) {
+                        JOptionPane.showMessageDialog(null, "No reservation found for this room today", "Info", JOptionPane.INFORMATION_MESSAGE);
+                        resStmt.close();
+                        return;
+                    }
+
+                    String customerQuery = "INSERT INTO customer (document, number, name, gender, country, room, checkintime, deposit, duration, price) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                    PreparedStatement customerStmt = C.connection.prepareStatement(customerQuery);
+                    customerStmt.setString(1, resRs.getString("document"));
+                    customerStmt.setString(2, resRs.getString("number"));
+                    customerStmt.setString(3, resRs.getString("name"));
+                    customerStmt.setString(4, resRs.getString("gender"));
+                    customerStmt.setString(5, resRs.getString("country"));
+                    customerStmt.setString(6, resRs.getString("room_number"));
+                    customerStmt.setString(7, resRs.getString("checkin_date"));
+                    customerStmt.setString(8, resRs.getString("deposit"));
+                    customerStmt.setString(9, resRs.getString("duration"));
+                    customerStmt.setString(10, resRs.getString("price"));
+                    customerStmt.executeUpdate();
+                    customerStmt.close();
+
+                    String updateResQuery = "UPDATE reservations SET status = 'Confirmed' WHERE room_number = ? AND checkin_date LIKE ?";
+                    PreparedStatement updateResStmt = C.connection.prepareStatement(updateResQuery);
+                    updateResStmt.setString(1, roomNumber);
+                    updateResStmt.setString(2, today + "%");
+                    updateResStmt.executeUpdate();
+                    updateResStmt.close();
+
+                    String updateRoomQuery = "UPDATE room SET availability = 'Occupied' WHERE room_number = ?";
+                    PreparedStatement updateStmt = C.connection.prepareStatement(updateRoomQuery);
+                    updateStmt.setString(1, roomNumber);
+                    updateStmt.executeUpdate();
+                    updateStmt.close();
+
+                    JOptionPane.showMessageDialog(null, "Reservation Processed Successfully. Room is now Occupied.");
+                    textField3.setText("Occupied");
+                    resStmt.close();
+                } catch (Exception E) {
+                    E.printStackTrace();
+                    JOptionPane.showMessageDialog(null, "Error processing reservation: " + E.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
         });
@@ -183,14 +224,14 @@ public class UpdateRoom extends JFrame {
 
         setUndecorated(true);
         setLayout(null);
-        setSize(950,450);
-        setLocation(305,135);
+        setSize(950, 500);
+        setLocation(305, 135);
         setVisible(true);
     }
 
     private void logoutAndRedirectToReception() {
-        Session.setAdmin(false); // Reset admin status
-        Session.setCalledFromUpdateRoom(false); // Reset context
+        Session.setAdmin(false);
+        Session.setCalledFromUpdateRoom(false);
         new Reception();
         setVisible(false);
     }

@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Date;
 
@@ -28,15 +29,15 @@ public class CheckOut extends JFrame {
         label.setForeground(Color.BLACK);
         panel.add(label);
 
-        JLabel UserID = new JLabel("Customer ID");
-        UserID.setBounds(30, 80, 150, 30);
-        UserID.setFont(new Font("Tahoma", Font.BOLD, 14));
-        UserID.setForeground(Color.BLACK);
-        panel.add(UserID);
+        JLabel userID = new JLabel("Customer ID");
+        userID.setBounds(30, 80, 150, 30);
+        userID.setFont(new Font("Tahoma", Font.BOLD, 14));
+        userID.setForeground(Color.BLACK);
+        panel.add(userID);
 
-        Choice Customer = new Choice();
-        Customer.setBounds(200, 80, 150, 25);
-        panel.add(Customer);
+        Choice customer = new Choice();
+        customer.setBounds(200, 80, 150, 25);
+        panel.add(customer);
 
         JLabel roomNum = new JLabel("Room Number");
         roomNum.setBounds(30, 130, 150, 30);
@@ -69,22 +70,22 @@ public class CheckOut extends JFrame {
         panel.add(checkoutTime);
 
         Date date = new Date();
-
-        JLabel LabelCheckoutTime = new JLabel(""+date);
-        LabelCheckoutTime.setBounds(200, 230, 250, 30);
-        LabelCheckoutTime.setFont(new Font("Tahoma", Font.PLAIN, 14));
-        LabelCheckoutTime.setForeground(Color.BLACK);
-        panel.add(LabelCheckoutTime);
+        JLabel labelCheckoutTime = new JLabel("" + date);
+        labelCheckoutTime.setBounds(200, 230, 250, 30);
+        labelCheckoutTime.setFont(new Font("Tahoma", Font.PLAIN, 14));
+        labelCheckoutTime.setForeground(Color.BLACK);
+        panel.add(labelCheckoutTime);
 
         try {
             con c = new con();
-            ResultSet resultSet = c.statement.executeQuery("select * from customer");
+            ResultSet resultSet = c.statement.executeQuery("SELECT * FROM customer");
             while (resultSet.next()) {
-                Customer.add(resultSet.getString("number"));
+                customer.add(resultSet.getString("number"));
             }
-
-        } catch (Exception E) {
-            E.printStackTrace();
+            resultSet.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error loading customer data: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
 
         JButton checkOut = new JButton("Check Out");
@@ -95,16 +96,54 @@ public class CheckOut extends JFrame {
         checkOut.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                try {
-                    con cv = new con();
-                    cv.statement.executeUpdate("delete from customer where number = '"+Customer.getSelectedItem()+"'");
-                    cv.statement.executeUpdate("update room set availability = 'available' where room_number = '"+labelRoomNumber.getText()+"'");
+                String customerId = customer.getSelectedItem();
+                String roomNumber = labelRoomNumber.getText();
 
-                    JOptionPane.showMessageDialog(null, "Done");
+                if (customerId == null || roomNumber.isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Please select a customer and check room details", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                try {
+                    con c = new con();
+
+                    // Verify customer exists
+                    String verifyQuery = "SELECT * FROM customer WHERE number = ?";
+                    PreparedStatement verifyStmt = c.connection.prepareStatement(verifyQuery);
+                    verifyStmt.setString(1, customerId);
+                    ResultSet rs = verifyStmt.executeQuery();
+                    if (!rs.next()) {
+                        JOptionPane.showMessageDialog(null, "Customer not found", "Error", JOptionPane.ERROR_MESSAGE);
+                        verifyStmt.close();
+                        return;
+                    }
+                    verifyStmt.close();
+
+                    // Delete customer record
+                    String deleteQuery = "DELETE FROM customer WHERE number = ?";
+                    PreparedStatement deleteStmt = c.connection.prepareStatement(deleteQuery);
+                    deleteStmt.setString(1, customerId);
+                    deleteStmt.executeUpdate();
+                    deleteStmt.close();
+
+                    // Update room availability
+                    String updateRoomQuery = "UPDATE room SET availability = 'Available' WHERE room_number = ?";
+                    PreparedStatement updateStmt = c.connection.prepareStatement(updateRoomQuery);
+                    updateStmt.setString(1, roomNumber);
+                    int rowsAffected = updateStmt.executeUpdate();
+                    updateStmt.close();
+
+                    if (rowsAffected == 0) {
+                        JOptionPane.showMessageDialog(null, "Room number not found", "Error", JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
+
+                    JOptionPane.showMessageDialog(null, "Check-Out Completed Successfully");
                     setVisible(false);
 
                 } catch (Exception E) {
                     E.printStackTrace();
+                    JOptionPane.showMessageDialog(null, "Error during check-out: " + E.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
         });
@@ -117,17 +156,28 @@ public class CheckOut extends JFrame {
         check.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                con c = new con();
+                String customerId = customer.getSelectedItem();
+                if (customerId == null) {
+                    JOptionPane.showMessageDialog(null, "Please select a customer", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
                 try {
-                    ResultSet resultSet = c.statement.executeQuery("select * from customer where number = '"+Customer.getSelectedItem()+"'");
-                    while(resultSet.next()) {
+                    con c = new con();
+                    String query = "SELECT * FROM customer WHERE number = ?";
+                    PreparedStatement pstmt = c.connection.prepareStatement(query);
+                    pstmt.setString(1, customerId);
+                    ResultSet resultSet = pstmt.executeQuery();
+                    if (resultSet.next()) {
                         labelRoomNumber.setText(resultSet.getString("room"));
                         labelCheckinTime.setText(resultSet.getString("checkintime"));
-
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Customer not found", "Error", JOptionPane.ERROR_MESSAGE);
                     }
-
+                    pstmt.close();
                 } catch (Exception E) {
                     E.printStackTrace();
+                    JOptionPane.showMessageDialog(null, "Error checking customer: " + E.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
         });
