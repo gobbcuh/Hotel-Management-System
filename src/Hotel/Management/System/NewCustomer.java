@@ -358,7 +358,6 @@ public class NewCustomer extends JFrame implements ActionListener {
                 checkResStmt.close();
 
                 if (!reserveCheckBox.isSelected()) {
-                    // Immediate check-in: Insert into customer table
                     String customerQuery = "INSERT INTO customer (document, number, name, gender, country, room, checkintime, deposit, duration, price) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
                     PreparedStatement pstmt = c.connection.prepareStatement(customerQuery);
                     pstmt.setString(1, document);
@@ -374,7 +373,6 @@ public class NewCustomer extends JFrame implements ActionListener {
                     pstmt.executeUpdate();
                     pstmt.close();
 
-                    // Update room availability
                     String updateRoomQuery = "UPDATE room SET availability = 'Occupied' WHERE room_number = ?";
                     PreparedStatement updateStmt = c.connection.prepareStatement(updateRoomQuery);
                     updateStmt.setString(1, room);
@@ -383,7 +381,6 @@ public class NewCustomer extends JFrame implements ActionListener {
 
                     JOptionPane.showMessageDialog(null, "Customer Checked In Successfully");
                 } else {
-                    // Advance reservation: Insert into reservations table
                     String reservationQuery = "INSERT INTO reservations (document, number, name, gender, country, room_number, checkin_date, duration, price, deposit, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'Pending')";
                     PreparedStatement pstmt = c.connection.prepareStatement(reservationQuery);
                     pstmt.setString(1, document);
@@ -399,7 +396,6 @@ public class NewCustomer extends JFrame implements ActionListener {
                     pstmt.executeUpdate();
                     pstmt.close();
 
-                    // Update room availability to Reserved
                     String updateRoomQuery = "UPDATE room SET availability = 'Reserved' WHERE room_number = ?";
                     PreparedStatement updateStmt = c.connection.prepareStatement(updateRoomQuery);
                     updateStmt.setString(1, room);
