@@ -19,6 +19,7 @@ public class NewCustomer extends JFrame implements ActionListener {
     JCheckBox reserveCheckBox;
 
     NewCustomer() {
+        // Your existing constructor code remains unchanged
         JPanel panel = new JPanel();
         panel.setBounds(5, 5, 840, 650);
         panel.setLayout(null);
@@ -289,6 +290,23 @@ public class NewCustomer extends JFrame implements ActionListener {
                 gender = "Male";
             } else if (r2.isSelected()) {
                 gender = "Female";
+            }
+
+            // Validate deposit
+            if (deposit.trim().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Deposit cannot be empty", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            double depositAmount;
+            try {
+                depositAmount = Double.parseDouble(deposit);
+                if (depositAmount < 0) {
+                    JOptionPane.showMessageDialog(null, "Deposit cannot be negative", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(null, "Deposit must be a valid number", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
             }
 
             Date currentDate = new Date();
