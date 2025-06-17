@@ -1,4 +1,4 @@
-package Hotel.Management.System;
+package Hotel.Management.System;    // only shows checked in customer info but not reserved
 
 import net.proteanit.sql.DbUtils;
 
