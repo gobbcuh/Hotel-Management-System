@@ -1,4 +1,4 @@
-package Hotel.Management.System;
+package Hotel.Management.System; // TO DO: reserved to checked in when reserved date has ended + reserve can be canceled and updated
 
 import javax.swing.*;
 import java.awt.*;
