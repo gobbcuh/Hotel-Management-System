@@ -9,7 +9,6 @@ import java.util.Date;
 
 public class UpdateRoom extends JFrame {
     UpdateRoom() {
-        // Check if the user is an admin using Session
         if (!Session.isAdmin()) {
             Session.setCalledFromUpdateRoom(true);
             JOptionPane.showMessageDialog(null, "Only admin is allowed to update room status. Please log in as admin.");
