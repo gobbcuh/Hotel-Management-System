@@ -79,12 +79,12 @@ public class Login2 extends JFrame implements ActionListener {
                 pstmt.setString(2, pass);
                 ResultSet resultSet = pstmt.executeQuery();
                 if (resultSet.next()) {
-                    Session.setAdmin(true); // Set admin status on successful login
+                    Session.setAdmin(true);
                     if (Session.isCalledFromUpdateRoom()) {
-                        new UpdateRoom(); // Return to UpdateRoom if called from there
-                        Session.setCalledFromUpdateRoom(false); // Reset the flag
+                        new UpdateRoom();
+                        Session.setCalledFromUpdateRoom(false);
                     } else {
-                        new admin(); // Default to admin page if not from UpdateRoom
+                        new admin();
                     }
                     setVisible(false);
                 } else {
@@ -95,7 +95,7 @@ public class Login2 extends JFrame implements ActionListener {
                 E.printStackTrace();
             }
         } else {
-            new Dashboard(); // Return to dashboard on cancel
+            new Dashboard();
             setVisible(false);
         }
     }
