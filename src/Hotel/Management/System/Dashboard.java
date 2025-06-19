@@ -13,7 +13,7 @@ public class Dashboard extends JFrame implements ActionListener {
         rec = new JButton("Reception");
         rec.setBounds(330, 510, 140, 30);
         rec.setFont(new Font("Tahoma", Font.BOLD, 15));
-        rec.setBackground(new Color(250, 213, 213));   // color to be changed
+        rec.setBackground(new Color(250, 213, 213));
         rec.setForeground(Color.BLACK);
         rec.addActionListener(this);
         add(rec);
@@ -21,7 +21,7 @@ public class Dashboard extends JFrame implements ActionListener {
         add = new JButton("Admin");
         add.setBounds(823, 510, 140, 30);
         add.setFont(new Font("Tahoma", Font.BOLD, 15));
-        add.setBackground(new Color(250, 213, 213));   // color to be changed
+        add.setBackground(new Color(250, 213, 213));
         add.setForeground(Color.BLACK);
         add.addActionListener(this);
         add(add);

@@ -23,7 +23,7 @@ public class CustomerInfo extends JFrame {
         panel.add(checkedInLabel);
 
         JTable checkedInTable = new JTable();
-        checkedInTable.setBounds(10, 70, 1070, 200); // Adjusted size and position
+        checkedInTable.setBounds(10, 70, 1070, 200);
         checkedInTable.setBackground(new Color(250, 213, 213));
         checkedInTable.setForeground(Color.BLACK);
         panel.add(checkedInTable);
