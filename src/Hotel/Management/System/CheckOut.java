@@ -107,7 +107,6 @@ public class CheckOut extends JFrame {
                 try {
                     con c = new con();
 
-                    // Verify customer exists
                     String verifyQuery = "SELECT * FROM customer WHERE number = ?";
                     PreparedStatement verifyStmt = c.connection.prepareStatement(verifyQuery);
                     verifyStmt.setString(1, customerId);
@@ -119,14 +118,12 @@ public class CheckOut extends JFrame {
                     }
                     verifyStmt.close();
 
-                    // Delete customer record
                     String deleteQuery = "DELETE FROM customer WHERE number = ?";
                     PreparedStatement deleteStmt = c.connection.prepareStatement(deleteQuery);
                     deleteStmt.setString(1, customerId);
                     deleteStmt.executeUpdate();
                     deleteStmt.close();
 
-                    // Update room availability
                     String updateRoomQuery = "UPDATE room SET availability = 'Available' WHERE room_number = ?";
                     PreparedStatement updateStmt = c.connection.prepareStatement(updateRoomQuery);
                     updateStmt.setString(1, roomNumber);
