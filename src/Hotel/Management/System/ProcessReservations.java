@@ -31,7 +31,6 @@ public class ProcessReservations extends JFrame {
         table.setForeground(Color.BLACK);
         panel.add(table);
 
-        // Load pending reservations
         refreshTable();
 
         JLabel id = new JLabel("Reservation ID");
@@ -123,13 +122,11 @@ public class ProcessReservations extends JFrame {
                     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                     String today = sdf.format(new Date());
 
-                    // Check if check-in date is today
                     if (!checkInDate.substring(0, 10).equals(today)) {
                         JOptionPane.showMessageDialog(null, "Can only process reservations for today", "Error", JOptionPane.ERROR_MESSAGE);
                         return;
                     }
 
-                    // Check room availability
                     String checkRoomQuery = "SELECT availability FROM room WHERE room_number = ?";
                     PreparedStatement checkStmt = c.connection.prepareStatement(checkRoomQuery);
                     checkStmt.setString(1, roomNumber);
@@ -140,13 +137,11 @@ public class ProcessReservations extends JFrame {
                     }
                     checkStmt.close();
 
-                    // Fetch reservation details
                     String fetchQuery = "SELECT * FROM reservations WHERE reservation_id = ?";
                     PreparedStatement fetchStmt = c.connection.prepareStatement(fetchQuery);
                     fetchStmt.setString(1, reservationId);
                     ResultSet reservationRs = fetchStmt.executeQuery();
                     if (reservationRs.next()) {
-                        // Insert into customer table
                         String customerQuery = "INSERT INTO customer (document, number, name, gender, country, room, checkintime, deposit, duration, price) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
                         PreparedStatement customerStmt = c.connection.prepareStatement(customerQuery);
                         customerStmt.setString(1, reservationRs.getString("document"));
@@ -162,14 +157,12 @@ public class ProcessReservations extends JFrame {
                         customerStmt.executeUpdate();
                         customerStmt.close();
 
-                        // Update room availability
                         String updateRoomQuery = "UPDATE room SET availability = 'Occupied' WHERE room_number = ?";
                         PreparedStatement updateStmt = c.connection.prepareStatement(updateRoomQuery);
                         updateStmt.setString(1, roomNumber);
                         updateStmt.executeUpdate();
                         updateStmt.close();
 
-                        // Update reservation status
                         String updateReservationQuery = "UPDATE reservations SET status = 'Confirmed' WHERE reservation_id = ?";
                         PreparedStatement updateResStmt = c.connection.prepareStatement(updateReservationQuery);
                         updateResStmt.setString(1, reservationId);
