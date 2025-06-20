@@ -98,7 +98,7 @@ public class Login extends JFrame implements ActionListener {
                 pstmt.setString(2, pass);
                 ResultSet resultSet = pstmt.executeQuery();
                 if (resultSet.next()) {
-                    Session.setAdmin(false); // Set non-admin status for regular users
+                    Session.setAdmin(false);
                     new Dashboard();
                     setVisible(false);
                 } else {
