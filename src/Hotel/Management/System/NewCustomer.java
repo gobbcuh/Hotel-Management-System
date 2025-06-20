@@ -19,7 +19,6 @@ public class NewCustomer extends JFrame implements ActionListener {
     JCheckBox reserveCheckBox;
 
     NewCustomer() {
-        // Your existing constructor code remains unchanged
         JPanel panel = new JPanel();
         panel.setBounds(5, 5, 840, 650);
         panel.setLayout(null);
@@ -292,7 +291,6 @@ public class NewCustomer extends JFrame implements ActionListener {
                 gender = "Female";
             }
 
-            // Validate deposit
             if (deposit.trim().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Deposit cannot be empty", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
@@ -315,7 +313,6 @@ public class NewCustomer extends JFrame implements ActionListener {
             String checkInDateStr;
 
             if (reserveCheckBox.isSelected()) {
-                // Reservation mode: Require future date
                 Date checkInDate = checkInDateChooser.getDate();
                 if (checkInDate == null) {
                     JOptionPane.showMessageDialog(null, "Please select a future check-in date for reservation", "Error", JOptionPane.ERROR_MESSAGE);
@@ -327,14 +324,12 @@ public class NewCustomer extends JFrame implements ActionListener {
                     return;
                 }
             } else {
-                // Check-In mode: Use current date/time
                 checkInDateStr = currentDateStr;
             }
 
             try {
                 con c = new con();
 
-                // Check if room is available
                 String checkRoomQuery = "SELECT availability FROM room WHERE room_number = ?";
                 PreparedStatement checkStmt = c.connection.prepareStatement(checkRoomQuery);
                 checkStmt.setString(1, room);
@@ -345,7 +340,6 @@ public class NewCustomer extends JFrame implements ActionListener {
                 }
                 checkStmt.close();
 
-                // Check for conflicting reservations
                 String checkReservationQuery = "SELECT * FROM reservations WHERE room_number = ? AND checkin_date LIKE ? AND status = 'Pending'";
                 PreparedStatement checkResStmt = c.connection.prepareStatement(checkReservationQuery);
                 checkResStmt.setString(1, room);
