@@ -139,7 +139,6 @@ public class PickUp extends JFrame {
 
                 try {
                     con c = new con();
-                    // Check if customer has an active booking
                     String checkQuery = "select * from booking where customer_number = '" + customerNumber + "' and status = 'Active'";
                     ResultSet rs = c.statement.executeQuery(checkQuery);
                     if (rs.next()) {
@@ -164,16 +163,13 @@ public class PickUp extends JFrame {
                         return;
                     }
 
-                    // Update driver status
                     String updateDriver = "update driver set available = 'Occupied' where name = '" + driverName + "'";
                     c.statement.executeUpdate(updateDriver);
 
-                    // Record booking
                     String bookingTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
                     String insertBooking = "insert into booking (customer_number, driver_name, car_name, booking_time, status) values ('" + customerNumber + "', '" + driverName + "', '" + carName + "', '" + bookingTime + "', 'Active')";
                     c.statement.executeUpdate(insertBooking);
 
-                    // Get the booking ID
                     ResultSet bookingRs = c.statement.executeQuery("select booking_id from booking where customer_number = '" + customerNumber + "' and status = 'Active' order by booking_time desc limit 1");
                     if (bookingRs.next()) {
                         currentBookingId = bookingRs.getString("booking_id");
@@ -209,7 +205,6 @@ public class PickUp extends JFrame {
 
                 try {
                     con c = new con();
-                    // Get driver name from booking
                     String getDriver = "select driver_name from booking where booking_id = '" + currentBookingId + "'";
                     ResultSet rs = c.statement.executeQuery(getDriver);
                     String driverName = null;
@@ -222,11 +217,9 @@ public class PickUp extends JFrame {
                         return;
                     }
 
-                    // Update booking status
                     String updateBooking = "update booking set status = 'Completed' where booking_id = '" + currentBookingId + "'";
                     c.statement.executeUpdate(updateBooking);
 
-                    // Update driver availability
                     String updateDriver = "update driver set available = 'Available' where name = '" + driverName + "'";
                     c.statement.executeUpdate(updateDriver);
 
